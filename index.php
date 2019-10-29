@@ -1,8 +1,8 @@
 <?php
 
-use classes\ActionStatus;
+use TaskForce\logic\ActionStatus;
 
-require_once 'classes\ActionStatus.php';
+require_once 'vendor/autoload.php';
 
 $actionStatus = new ActionStatus();
 
