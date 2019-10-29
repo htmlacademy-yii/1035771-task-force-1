@@ -1,20 +1,17 @@
 <?php
 
+use classes\ActionStatus;
+
 require_once 'classes\ActionStatus.php';
 
-$test = new classes\ActionStatus();
-$result = $test ->listActs();
+$actionStatus = new ActionStatus();
 
-$test2 = new classes\ActionStatus();
-$result2 = $test2 ->listStatus();
+assert($actionStatus->getNewStatus(ActionStatus::ACTION_NEW) === ActionStatus::STATUS_NEW, 'при создании задачи возвращается статус "Новое"');
 
-$test3 = new classes\ActionStatus();
-$result3 = $test3 ->NewStatus1();
+assert($actionStatus->getNewStatus(ActionStatus::ACTION_START) === ActionStatus::STATUS_PROCESS, 'при старте работы над задачей возвращает статус "В работе"');
 
-var_dump($result, $result2, $result3);
+assert($actionStatus->getNewStatus(ActionStatus::ACTION_FINISH) === ActionStatus::STATUS_DONE, 'при завершении работы возвращается статус "Выполнено"');
 
+assert($actionStatus->getNewStatus(ActionStatus::ACTION_CANCEL) === ActionStatus::STATUS_CANCELED, 'при отмене задачи возвращается статус "Отменено"');
 
-
-
-
-
+assert($actionStatus->getNewStatus(ActionStatus::ACTION_REFUSE) === ActionStatus::STATUS_FAILED, 'при отказе от выполения возвращается статус "Провалено"');

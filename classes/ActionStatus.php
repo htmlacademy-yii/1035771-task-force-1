@@ -6,10 +6,7 @@ namespace classes;
 
 class ActionStatus
 {
-
-    const ACTION_ADD = 'addTask';
-    const ACTION_SEND = 'sendMessage';
-    //const ACTION_TAKE = 'wantToTake';
+    const ACTION_NEW = 'newTask';
     const ACTION_START = 'startTask';
     const ACTION_CANCEL = 'cancelTask';
     const ACTION_REFUSE = 'refuseTask';
@@ -21,49 +18,32 @@ class ActionStatus
     const STATUS_FAILED = 'failed';
     const STATUS_CANCELED = 'canceled';
 
-    const ROLE_CUSTOMER = 'customer';
-    const ROLE_WORKER = 'worker';
-
-    const ACTS = ['addTask', 'sendMessage', 'wantToTake', 'startTask', 'cancelTask', 'refuseTask', 'doneTask'];
-    const STATUS = ['new', 'process', 'done', 'failed', 'canceled'];
-    const ROLES= ['customer', 'worker'];
-
-    public $idWorker = [];
-    public $idCustomer = [];
-    public $activeStatus = [];
-    public $deadline = [];
-
-    /*public function __construct($acts, $status)
-    {
-        $this->acts = $acts;
-        $this->status = $status;
-
-    }*/
-
     public function listActs () {
-        //return $acts=[self::ACTION_ADD, self::ACTION_SEND, self::ACTION_CANCEL, self::ACTION_FINISH, self::ACTION_REFUSE, self::ACTION_START];
-        return $acts = self::ACTS;
+        return $acts = [self::ACTION_CANCEL, self::ACTION_FINISH, self::ACTION_REFUSE, self::ACTION_START, self::ACTION_NEW];
     }
 
     public function listStatus () {
-        return $status = self::STATUS;
+        return $status = [self::STATUS_CANCELED, self::STATUS_NEW, self::STATUS_DONE, self::STATUS_PROCESS, self::STATUS_FAILED];
     }
 
+    public function getNewStatus ($action) {
 
-    /*public function NewStatus()
-    {
-        foreach ($this->acts as $key => $act) {
+        switch ($action) {
+            case self::ACTION_NEW:
+                return self::STATUS_NEW;
 
-            if ($this->act == self::ACTION_CANCEL) return 'canceled';
-            if ($this->act == self::ACTION_START) return 'process';
-            if ($this->act == self::ACTION_FINISH) return 'done';
-            if ($this->act == self::ACTION_REFUSE) return 'failed';
+            case self::ACTION_FINISH:
+                return self::STATUS_DONE;
+
+            case self::ACTION_CANCEL:
+                return self::STATUS_CANCELED;
+
+            case self::ACTION_REFUSE:
+                return self::STATUS_FAILED;
+
+            case self::ACTION_START:
+                return self::STATUS_PROCESS;
         }
-
-    }*/
-
-    public function NewStatus1 () {
-            return 'canceled';
+         return null;
     }
-
 }
