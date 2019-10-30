@@ -1,5 +1,4 @@
 <?php
-
 use TaskForce\logic\ActionStatus;
 
 require_once 'vendor/autoload.php';
