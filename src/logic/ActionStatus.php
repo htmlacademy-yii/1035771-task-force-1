@@ -1,7 +1,7 @@
 <?php
 
 
-namespace TaskForce\logic;
+namespace app\logic;
 
 
 class ActionStatus
