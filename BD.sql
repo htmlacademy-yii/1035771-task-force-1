@@ -50,8 +50,19 @@ CREATE TABLE tasks (
 
 CREATE TABLE task_files (
    id INT AUTO_INCREMENT PRIMARY KEY,
-   url VARCHAR (500) NOT NULL,
+   file_id VARCHAR (500) NOT NULL,
    task_id INT NOT NULL
+);
+
+CREATE TABLE user_files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    file_id VARCHAR (500) NOT NULL,
+    user_id INT NOT NULL
+);
+
+CREATE  TABLE files (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    url VARCHAR (500) NOT NULL
 );
 
 CREATE TABLE reviews (
@@ -78,12 +89,6 @@ CREATE TABLE locations (
     district VARCHAR (500) NULL
 );
 
-CREATE TABLE user_files (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    url VARCHAR (500) NOT NULL,
-    user_id INT NOT NULL
-);
-
 CREATE TABLE user_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     viewed TINYINT NOT NULL DEFAULT 0,
@@ -100,11 +105,6 @@ ON UPDATE CASCADE;
 
 ALTER TABLE tasks
 ADD FOREIGN KEY (executor_id) REFERENCES users(id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE tasks
-ADD FOREIGN KEY (category_id) REFERENCES categories(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
@@ -133,14 +133,24 @@ ADD FOREIGN KEY (task_id) REFERENCES tasks(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
+ALTER TABLE task_files
+ADD FOREIGN KEY (file_id) REFERENCES files(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+ALTER TABLE user_files
+ADD FOREIGN KEY (file_id) REFERENCES files(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
 ALTER TABLE users_categories
 ADD UNIQUE users_categories_user_id_category_id_udx (user_id, category_id);
 
 ALTER TABLE task_files
-ADD UNIQUE task_files_url_task_id_udx (url, task_id);
+ADD UNIQUE task_files_file_id_task_id_udx (file_id, task_id);
 
 ALTER TABLE user_files
-ADD UNIQUE user_files_url_user_id_udx (url, user_id);
+ADD UNIQUE user_files_file_id_user_id_udx (file_id, user_id);
 
 ALTER TABLE user_messages
 ADD UNIQUE user_messages_sender_id_recipient_id_udx (sender_id, recipient_id);
