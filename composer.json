@@ -1,6 +1,8 @@
 {
     "name": "vikto/1035771-task-force-1",
     "description": "look for workers",
+    "type": "project",
+    "license": "MIT",
     "authors": [
         {
             "name": "Viktoria V",
@@ -10,10 +12,9 @@
     "require": {
     },
 
-      "autoload": {
-        "psr-4": {
-          "app\\": "src/"
-        }
+       "autoload": {
+         "psr-4": {
+           "app\\": "src/"
     }
+  }
 }
-
