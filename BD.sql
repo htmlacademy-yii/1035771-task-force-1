@@ -60,7 +60,7 @@ CREATE TABLE user_files (
     user_id INT NOT NULL
 );
 
-CREATE  TABLE files (
+CREATE TABLE files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     url VARCHAR (500) NOT NULL
 );
@@ -133,16 +133,6 @@ ADD FOREIGN KEY (task_id) REFERENCES tasks(id)
 ON DELETE CASCADE
 ON UPDATE CASCADE;
 
-ALTER TABLE task_files
-ADD FOREIGN KEY (file_id) REFERENCES files(id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
-ALTER TABLE user_files
-ADD FOREIGN KEY (file_id) REFERENCES files(id)
-ON DELETE CASCADE
-ON UPDATE CASCADE;
-
 ALTER TABLE users_categories
 ADD UNIQUE users_categories_user_id_category_id_udx (user_id, category_id);
 
@@ -154,3 +144,13 @@ ADD UNIQUE user_files_file_id_user_id_udx (file_id, user_id);
 
 ALTER TABLE user_messages
 ADD UNIQUE user_messages_sender_id_recipient_id_udx (sender_id, recipient_id);
+
+ALTER TABLE task_files
+ADD FOREIGN KEY (file_id) REFERENCES files(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
+
+ALTER TABLE user_files
+ADD FOREIGN KEY (file_id) REFERENCES files(id)
+ON DELETE CASCADE
+ON UPDATE CASCADE;
