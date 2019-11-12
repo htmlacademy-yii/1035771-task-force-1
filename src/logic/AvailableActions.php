@@ -14,7 +14,7 @@ class AvailableActions
 
     const STATUS_NEW = 'new';
     const STATUS_PROCESS = 'process';
-    const STATUS_DONE = 'done';
+    const STATUS_COMPLETED = 'done';
     const STATUS_FAILED = 'failed';
     const STATUS_CANCELED = 'canceled';
 
@@ -26,17 +26,17 @@ class AvailableActions
     }
 
     public function listStatus () {
-        return $status = [self::STATUS_CANCELED, self::STATUS_NEW, self::STATUS_DONE, self::STATUS_PROCESS, self::STATUS_FAILED];
+        return $status = [self::STATUS_CANCELED, self::STATUS_NEW, self::STATUS_COMPLETED, self::STATUS_PROCESS, self::STATUS_FAILED];
     }
 
     public function getNewStatus ($action) {
 
         switch ($action) {
-            case NewAction::class:
+            case self::ACTION_NEW:
                 return self::STATUS_NEW;
 
             case CompleteAction::class:
-                return self::STATUS_DONE;
+                return self::STATUS_COMPLETED;
 
             case CancelAction::class:
                 return self::STATUS_CANCELED;
