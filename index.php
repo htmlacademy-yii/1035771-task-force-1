@@ -12,7 +12,7 @@ require_once 'vendor/autoload.php';
 
 $availableAction = new AvailableActions();
 
-assert($availableAction->getNewStatus(\app\logic\NewAction::class) === AvailableActions::STATUS_NEW, 'при создании задачи возвращается статус "Новое"');
+assert($availableAction->getNewStatus(AvailableActions::ACTION_NEW) === AvailableActions::STATUS_NEW, 'при создании задачи возвращается статус "Новое"');
 
 assert($availableAction->getNewStatus(\app\logic\StartAction::class) === AvailableActions::STATUS_PROCESS, 'при старте работы над задачей возвращает статус "В работе"');
 
