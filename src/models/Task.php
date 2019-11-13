@@ -2,6 +2,7 @@
 namespace app\models;
 use app\models\actions\CancelAction;
 use app\models\actions\CompleteAction;
+use app\models\actions\ProposeAction;
 use app\models\actions\RefuseAction;
 use app\models\actions\StartAction;
 
@@ -70,4 +71,11 @@ class Task
         //если доступно выставляет статус PROCESS
     }
 
+    public function propose(int $initiator_id) {
+        //проверяет доступность действия Propose
+        if (ProposeAction::verifyAbility($initiator_id, $this)) {
+            $this->status = self::STATUS_NEW;
+        }
+        //если доступно выставляет статус NEW
+    }
 }

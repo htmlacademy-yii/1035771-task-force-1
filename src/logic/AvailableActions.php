@@ -11,6 +11,7 @@ class AvailableActions
     const ACTION_CANCEL = 'action_cancel';
     const ACTION_REFUSE = 'action_refuse';
     const ACTION_FINISH = 'action_finish';
+    const ACTION_PROPOSE = 'action_propose';
 
     const STATUS_NEW = 'new';
     const STATUS_PROCESS = 'process';

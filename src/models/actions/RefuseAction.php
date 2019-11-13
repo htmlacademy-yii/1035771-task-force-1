@@ -23,7 +23,7 @@ class RefuseAction extends AbstractAction
             return false;
         }
 
-        if ($initiator_id ===  $task->getCustomer()) {
+        if ($initiator_id !==  $task->getExecutor()) {
             return false;
         }
 
