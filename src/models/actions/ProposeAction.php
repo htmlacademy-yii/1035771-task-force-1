@@ -20,7 +20,7 @@ class ProposeAction extends AbstractAction
 
     public static function verifyAbility(int $initiator_id, Task $task): bool
     {
-        if ($initiator_id !== $task->getExecutor()) {
+        if ($task->getExecutor()) {
              return false;
         }
 

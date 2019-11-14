@@ -3,6 +3,7 @@
 
 namespace app\logic;
 
+use app\models\User;
 
 class AvailableActions
 {
@@ -51,7 +52,14 @@ class AvailableActions
          return null;
     }
 
-    public function showAllActions ($role, $id_user) {
+    public static function verifyRole(User $user): bool
+    {
+        if ($user->isExecutor()) {
+            return true;
+        }
+        return false;
+    }
+   /* public function showAllActions ($role, $id_user) {
 
         if ($role === self::ROLE_EXECUTOR && $id_user === $tasks['executor_id']) {
 
@@ -78,5 +86,5 @@ class AvailableActions
             }
         }
 
-    }
+    }*/
 }
