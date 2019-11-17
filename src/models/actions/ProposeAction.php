@@ -24,6 +24,10 @@ class ProposeAction extends AbstractAction
              return false;
         }
 
+        if ($task->getCustomer() === $initiator_id) {
+            return false;
+        }
+
         if ($task->getStatus() !== Task::STATUS_NEW) {
             return false;
         }

@@ -3,6 +3,8 @@
 
 namespace app\logic;
 
+use app\models\actions\StartAction;
+use app\models\Task;
 use app\models\User;
 
 class AvailableActions
@@ -34,10 +36,10 @@ class AvailableActions
     public function getNewStatus ($action) {
 
         switch ($action) {
-            case self::ACTION_NEW:
+            case StartAction::getName():
                 return self::STATUS_NEW;
 
-            case CompleteAction::class:
+            case CompleteAction::getName():
                 return self::STATUS_COMPLETED;
 
             case CancelAction::class:
@@ -52,39 +54,4 @@ class AvailableActions
          return null;
     }
 
-    public static function verifyRole(User $user): bool
-    {
-        if ($user->isExecutor()) {
-            return true;
-        }
-        return false;
-    }
-   /* public function showAllActions ($role, $id_user) {
-
-        if ($role === self::ROLE_EXECUTOR && $id_user === $tasks['executor_id']) {
-
-            if (self::STATUS_NEW) {
-                return ProposeAction::class;
-                }
-            if (self::STATUS_PROCESS) {
-                return RefuseAction::class;
-            }
-        }
-
-        if ($role === self::ROLE_CUSTOMER && $id_user === $tasks['customer_id']) {
-
-            if (self::STATUS_NEW) {
-                return CancelAction::class;
-            }
-
-            if (self::STATUS_NEW) {
-                return StartAction::class;
-            }
-
-            if (self::STATUS_PROCESS) {
-                return CompleteAction::class;
-            }
-        }
-
-    }*/
 }
