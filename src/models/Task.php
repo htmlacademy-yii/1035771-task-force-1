@@ -34,7 +34,7 @@ class Task
         return $this->customer_id;
     }
 
-    public function getExecutor(): int
+    public function getExecutor(): ?int
     {
         return $this->executor_id;
     }
@@ -77,5 +77,55 @@ class Task
             $this->status = self::STATUS_NEW;
         }
 
+    }
+
+    public function getAvailableActions(int $initiator_id): array
+    {
+        $result = [];
+
+        if (StartAction::verifyAbility($initiator_id, $this)) {
+            $result[] = StartAction::getName();
+        }
+
+        if (CompleteAction::verifyAbility($initiator_id, $this)) {
+            $result[] = CompleteAction::getName();
+        }
+
+        if (RefuseAction::verifyAbility($initiator_id, $this)) {
+            $result[] = RefuseAction::getName();
+        }
+
+        if (CancelAction::verifyAbility($initiator_id, $this)) {
+            $result[] = CancelAction::getName();
+        }
+
+        if (ProposeAction::verifyAbility($initiator_id, $this)) {
+            $result[] = ProposeAction::getName();
+        }
+        return $result;
+    }
+
+    public function setExecutor(int $executor_id)
+    {
+        $this->executor_id = $executor_id;
+
+    }
+
+    public function getNewStatus ($action) {
+
+        switch ($action) {
+            case StartAction::getName():
+                return self::STATUS_NEW;
+
+            case CompleteAction::getName():
+                return self::STATUS_COMPLETED;
+
+            case CancelAction::getName():
+                return self::STATUS_CANCELED;
+
+            case RefuseAction::getName():
+                return self::STATUS_FAILED;
+        }
+        return null;
     }
 }
