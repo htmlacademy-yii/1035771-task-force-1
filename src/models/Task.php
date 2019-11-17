@@ -115,7 +115,7 @@ class Task
 
         switch ($action) {
             case StartAction::getName():
-                return self::STATUS_NEW;
+                return self::STATUS_PROCESS;
 
             case CompleteAction::getName():
                 return self::STATUS_COMPLETED;
