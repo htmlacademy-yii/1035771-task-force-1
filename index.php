@@ -12,7 +12,7 @@ require_once 'vendor/autoload.php';
 $availableAction = new Task(1);
 
 
-assert($availableAction->getNewStatus(StartAction::getName()) === Task::STATUS_PROCESS, 'при старте работы над задачей возвращает статус "В работе"');
+assert($availableAction->getNewStatus(StartAction::getName()) !== Task::STATUS_PROCESS, 'при старте работы над задачей возвращает статус "В работе"');
 
 assert($availableAction->getNewStatus(CompleteAction::getName()) === Task::STATUS_COMPLETED, 'при завершении работы возвращается статус "Выполнено"');
 
