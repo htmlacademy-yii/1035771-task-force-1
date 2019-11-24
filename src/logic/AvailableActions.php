@@ -36,19 +36,17 @@ class AvailableActions
     public function getNewStatus ($action) {
 
         switch ($action) {
-            case StartAction::getName():
-                return self::STATUS_NEW;
 
             case CompleteAction::getName():
                 return self::STATUS_COMPLETED;
 
-            case CancelAction::class:
+            case CancelAction::getName():
                 return self::STATUS_CANCELED;
 
-            case RefuseAction::class:
+            case RefuseAction::getName():
                 return self::STATUS_FAILED;
 
-            case StartAction::class:
+            case StartAction::getName():
                 return self::STATUS_PROCESS;
         }
          return null;

@@ -1,5 +1,9 @@
 <?php
 namespace app\models;
+
+use app\exception\ChangeStatusException;
+use app\exception\UnknownActionException;
+use app\exception\WrongRoleException;
 use app\models\actions\CancelAction;
 use app\models\actions\CompleteAction;
 use app\models\actions\ProposeAction;
@@ -24,6 +28,16 @@ class Task
         $this->status = self::STATUS_NEW;
     }
 
+    public function listActs (): array
+    {
+        return $acts = [CancelAction::class, CompleteAction::class, RefuseAction::class, StartAction::class];
+    }
+
+    public function listStatus (): array
+    {
+        return $status = [self::STATUS_CANCELED, self::STATUS_NEW, self::STATUS_COMPLETED, self::STATUS_PROCESS, self::STATUS_FAILED];
+    }
+
     public function getStatus(): string
     {
         return $this->status;
@@ -39,46 +53,71 @@ class Task
         return $this->executor_id;
     }
 
+    /**
+     * @param int $initiator_id
+     * @throws ChangeStatusException
+     * @throws WrongRoleException
+     */
     public function complete(int $initiator_id) {
-
-        if (CompleteAction::verifyAbility($initiator_id, $this)) {
-            $this->status = self::STATUS_COMPLETED;
+            if (!CompleteAction::verifyAbility($initiator_id, $this)) {
+                throw new ChangeStatusException('Ошибка при выставлении статуса complete');
+            }
+        $this->status = self::STATUS_COMPLETED;
         }
 
-    }
 
+    /**
+     * @param int $initiator_id
+     * @throws ChangeStatusException
+     * @throws WrongRoleException
+     */
     public function cancel(int $initiator_id) {
-
-        if (CancelAction::verifyAbility($initiator_id, $this)) {
-            $this->status = self::STATUS_CANCELED;
+        if (!CancelAction::verifyAbility($initiator_id, $this)) {
+            throw new ChangeStatusException('Ошибка при выставлении статуса cancel');
         }
-
+        $this->status = self::STATUS_CANCELED;
     }
 
+    /**
+     * @param int $initiator_id
+     * @throws ChangeStatusException
+     * @throws WrongRoleException
+     */
     public function refuse(int $initiator_id) {
-
-        if (RefuseAction::verifyAbility($initiator_id, $this)) {
-            $this->status = self::STATUS_FAILED;
+        if (!RefuseAction::verifyAbility($initiator_id, $this)) {
+            throw new ChangeStatusException('Ошибка при выставлении статуса refuse');
         }
-
+        $this->status = self::STATUS_FAILED;
     }
 
+    /**
+     * @param int $initiator_id
+     * @throws ChangeStatusException
+     * @throws WrongRoleException
+     */
     public function start(int $initiator_id) {
-
-        if (StartAction::verifyAbility($initiator_id, $this)) {
-            $this->status = self::STATUS_PROCESS;
+        if (!StartAction::verifyAbility($initiator_id, $this)) {
+            throw new ChangeStatusException('Ошибка при выставлении статуса start');
         }
-
+        $this->status = self::STATUS_PROCESS;
     }
 
+    /**
+     * @param int $initiator_id
+     * @throws ChangeStatusException
+     * @throws WrongRoleException
+     */
     public function propose(int $initiator_id) {
-
-        if (ProposeAction::verifyAbility($initiator_id, $this)) {
-            $this->status = self::STATUS_NEW;
+        if (!ProposeAction::verifyAbility($initiator_id, $this)) {
+            throw new ChangeStatusException('Ошибка при выставлении статуса propose');
         }
-
     }
 
+    /**
+     * @param int $initiator_id
+     * @return array
+     * @throws WrongRoleException
+     */
     public function getAvailableActions(int $initiator_id): array
     {
         $result = [];
@@ -108,11 +147,28 @@ class Task
     public function setExecutor(int $executor_id)
     {
         $this->executor_id = $executor_id;
-
     }
 
-    public function getNewStatus ($action) {
+    public function setCustomer(int $customer_id)
+    {
+        $this->customer_id = $customer_id;
+    }
 
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status)
+    {
+        $this->status = $status;
+    }
+
+    /**
+     * @param $action
+     * @return string
+     * @throws UnknownActionException
+     */
+    public function getNewStatus ($action): string
+    {
         switch ($action) {
             case StartAction::getName():
                 return self::STATUS_PROCESS;
@@ -126,6 +182,6 @@ class Task
             case RefuseAction::getName():
                 return self::STATUS_FAILED;
         }
-        return null;
+        throw new UnknownActionException('Неизвестное действие');
     }
 }

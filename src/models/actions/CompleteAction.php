@@ -3,6 +3,7 @@
 
 namespace app\models\actions;
 
+use app\exception\WrongRoleException;
 use app\models\Task;
 
 class CompleteAction extends AbstractAction
@@ -17,14 +18,21 @@ class CompleteAction extends AbstractAction
           return 'action_finish';
      }
 
-    public static function verifyAbility(int $initiator_id, Task $task): bool
+
+    /**
+     * @param int $initiator_id
+     * @param Task $task
+     * @return string
+     * @throws WrongRoleException
+     */
+    public static function verifyAbility(int $initiator_id, Task $task): string
     {
         if ($task->getStatus() !== Task::STATUS_PROCESS) {
             return false;
         }
 
         if ($initiator_id !==  $task->getCustomer()) {
-            return false;
+            throw new WrongRoleException('Роль не соответствует инициатору');
         }
 
         return true;
