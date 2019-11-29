@@ -24,7 +24,8 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(128) NOT NULL
+    title VARCHAR(128) NOT NULL,
+    icon VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE users_categories (
@@ -83,7 +84,9 @@ CREATE TABLE proposals (
 
 CREATE TABLE locations (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    city_id VARCHAR (64) NOT NULL,
+    city VARCHAR (64) NOT NULL,
+    lat DEC(10,7) NOT NULL,
+    length DEC(10,7) NOT NULL,
     region VARCHAR (128) NULL,
     street VARCHAR (500) NULL,
     district VARCHAR (500) NULL
