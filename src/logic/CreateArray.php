@@ -4,6 +4,9 @@
 namespace app\logic;
 
 
+/**
+ * @method toArray()
+ */
 class CreateArray
 {
     public $filename;
@@ -35,9 +38,6 @@ class CreateArray
             }
         }
     }
-    public function toArray(): array
-    {
-        return $this->result;
-    }
+
 }
 

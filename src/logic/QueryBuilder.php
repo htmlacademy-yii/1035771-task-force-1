@@ -10,8 +10,8 @@ use app\models\User;
 class QueryBuilder
 {
 
-    public function getSqlCategory(Category $category) {
-        return 'INSERT INTO categories (title, icon) VALUES ($category = $arraysForQueryBuilder)';
+    public function getSqlCategory(Category $arraysForQueryBuilder) {
+        return 'INSERT INTO categories (title, icon) VALUES ($arraysForQueryBuilder)';
     }
 
     public function getSqlUser(User $arraysForQueryBuilder) {
