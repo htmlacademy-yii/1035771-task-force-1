@@ -1,14 +1,13 @@
 <?php
-declare(strict_types=1);
+
 
 namespace app\logic;
 
-use SplFileObject;
 
-class TransferFormat
+class CreateArray
 {
     public $filename;
-    public $format = '';
+    public $result = [];
 
     public function __construct(string $filename)
     {
@@ -18,7 +17,7 @@ class TransferFormat
     /**
      * @param $filename
      */
-    public function transfer($filename): void
+    public function createArray($filename): void
     {
 
         if (($handle = fopen($filename, 'r')) !== false) {
@@ -30,13 +29,15 @@ class TransferFormat
 
                 foreach ($data as $value) {
 
-                    $line = array_merge($line, str_getcsv($value));
+                    $line = array_merge($line, str_getcsv($value, ';'));
                 }
-
-                $format = "INSERT INTO categories (title, icon) VALUES (%s); ";
-                printf($format, '"' . implode('","',$line) . '"');
+               print_r($this->result[] = $line);
             }
         }
+    }
+    public function toArray(): array
+    {
+        return $this->result;
     }
 }
 

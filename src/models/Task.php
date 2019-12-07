@@ -4,6 +4,7 @@ namespace app\models;
 use app\exception\ChangeStatusException;
 use app\exception\UnknownActionException;
 use app\exception\WrongRoleException;
+use app\logic\CreateArray;
 use app\models\actions\CancelAction;
 use app\models\actions\CompleteAction;
 use app\models\actions\ProposeAction;
@@ -21,6 +22,44 @@ class Task
     private $executor_id;
     private $customer_id;
     private $status;
+
+    private $id;
+    private $title;
+    private $description;
+    private $creation_time;
+    private $url_file;
+    private $deadline;
+    private $budget;
+    private $category;
+    private $location_id;
+
+    public function loadCsvArray(array $array): void
+    {
+        $this->id = $array['task_number'];
+        $this->title = $array['task_title'];
+        $this->description = $array['task_description'];
+        $this->creation_time = $array['task_dt_add'];
+        $this->url_file = $array['url_file'];
+        $this->deadline = $array['task_deadline'];
+        $this->budget = $array['task_budget'];
+        $this->category = $array['task_category'];
+        $this->location_id = $array['task_location'];
+    }
+
+    public function getAttributes()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'creation_time' => $this->creation_time,
+            'url_file' => $this->url_file,
+            'deadline' => $this->deadline,
+            'budget' => $this-> budget,
+            'category' => $this->category,
+            'location' => $this->location_id
+        ];
+    }
 
     public function __construct(int $customer_id)
     {
@@ -184,4 +223,17 @@ class Task
         }
         throw new UnknownActionException('Неизвестное действие');
     }
+}
+
+$arraysForQueryBuilder = [];
+$csvParser = new CreateArray('data\tasks.csv');
+
+
+$arraysFromCsv = $csvParser->toArray();
+
+foreach ($arraysFromCsv as $arrayFromCsv) {
+
+    $category = new Task;
+    $category->loadCsvArray($arrayFromCsv);
+    $arraysForQueryBuilder[] = $category->getAttributes();
 }
