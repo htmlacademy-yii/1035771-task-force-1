@@ -4,7 +4,6 @@ namespace app\models;
 use app\exception\ChangeStatusException;
 use app\exception\UnknownActionException;
 use app\exception\WrongRoleException;
-use app\logic\CreateArray;
 use app\models\actions\CancelAction;
 use app\models\actions\CompleteAction;
 use app\models\actions\ProposeAction;
@@ -44,6 +43,9 @@ class Task
         $this->budget = $array['task_budget'];
         $this->category = $array['task_category'];
         $this->location_id = $array['task_location'];
+        $this->customer_id = $array['task_customer'];
+        $this->executor_id = $array['task_executor'];
+        $this->status = $array['task_status'];
     }
 
     public function getAttributes()
@@ -57,7 +59,10 @@ class Task
             'deadline' => $this->deadline,
             'budget' => $this-> budget,
             'category' => $this->category,
-            'location' => $this->location_id
+            'location' => $this->location_id,
+            'customer' => $this->customer_id,
+            'executor' => $this->executor_id,
+            'status' => $this->status
         ];
     }
 
@@ -223,17 +228,4 @@ class Task
         }
         throw new UnknownActionException('Неизвестное действие');
     }
-}
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\tasks.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new Task;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
 }

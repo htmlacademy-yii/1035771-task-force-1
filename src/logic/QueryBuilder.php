@@ -3,22 +3,34 @@
 
 namespace app\logic;
 
-use app\models\Category;
-use app\models\Task;
-use app\models\User;
 
 class QueryBuilder
 {
+    private $tableName;
+    private $attributes;
 
-    public function getSqlCategory(Category $arraysForQueryBuilder) {
-        return 'INSERT INTO categories (title, icon) VALUES ($arraysForQueryBuilder)';
+    public function __construct(string $tableName, array $attributes)
+    {
+        $this->tableName = $tableName;
+        $this->attributes = $attributes;
     }
 
-    public function getSqlUser(User $arraysForQueryBuilder) {
-        return 'INSERT INTO users (name, email, password, creation_time) VALUES ($arraysForQueryBuilder)';
+    public function getSql() {
+        $fieldsString =$this->getFieldsString();
+        $valuesString = $this->getValuesString();
+        return "INSERT INTO {$this->tableName} ($fieldsString) VALUES ($valuesString)";
     }
 
-    public function getSqlTask(Task $arraysForQueryBuilder) {
-        return 'INSERT INTO tasks (title, description, creation_time, deadline, budget, category_id, location_id) VALUES ($arraysForQueryBuilder)';
+    private function getFieldsString() {
+        $fields = array_keys($this->attributes);
+        return implode(',', $fields);
+    }
+
+    private function getValuesString() {
+        $values = [];
+        foreach ($this->attributes as $value) {
+            $values[] = "'". $value . "'";
+        }
+        return implode(',', $values);
     }
 }

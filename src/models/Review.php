@@ -31,16 +31,3 @@ class Review
         ];
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\opinions.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new Review;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}

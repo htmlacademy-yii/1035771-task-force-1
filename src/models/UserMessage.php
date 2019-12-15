@@ -37,16 +37,3 @@ class UserMessage
         ];
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\messages.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new UserMessage;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}

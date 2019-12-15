@@ -37,16 +37,3 @@ class Proposal
         ];
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\replies.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new Proposal;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}

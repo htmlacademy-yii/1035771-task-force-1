@@ -25,16 +25,3 @@ class File
         ];
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\profiles.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new File;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}

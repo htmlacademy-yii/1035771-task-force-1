@@ -40,16 +40,3 @@ class Location
         ];
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\cities.csv');
-
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new Location;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}

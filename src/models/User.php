@@ -72,15 +72,3 @@ class User
         return $this->role = self::ROLE_EXECUTOR;
     }
 }
-
-$arraysForQueryBuilder = [];
-$csvParser = new CreateArray('data\users.csv');
-
-$arraysFromCsv = $csvParser->toArray();
-
-foreach ($arraysFromCsv as $arrayFromCsv) {
-
-    $category = new User;
-    $category->loadCsvArray($arrayFromCsv);
-    $arraysForQueryBuilder[] = $category->getAttributes();
-}
