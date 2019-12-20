@@ -23,8 +23,8 @@ class Parser
         $array_line_full = [];
 
         while (($line = fgetcsv($handle, 0, ";")) !== FALSE) {
-            $array_line_full[] = array_filter($line);
+            $array_line_full[] = $line;
         }
-        return $array_line_full;
+        return array_values($array_line_full);
     }
 }

@@ -9,15 +9,14 @@ use app\models\User;
 require_once 'vendor/autoload.php';
 
 $arraysForQueryBuilder = [];
-$csvParser = new \app\logic\Parser('data\categories.csv');
-$arraysFromCsv = $csvParser->getCSV();
+$csvParser = new \app\logic\CreateArray('data\categories.csv');
+$csvParser->createArray('data\categories.csv');
 
-foreach ($arraysFromCsv as $arrayFromCsv) {
+foreach ($csvParser as $arrayFromCsv) {
     $category = new Category();
-    $category->loadCsvArray($arrayFromCsv);
+    $category->loadCsvArray(explode(',', $arrayFromCsv));
     $attributes = $category->getAttributes();
+    $queryBuild = new \app\logic\QueryBuilder('categories', $attributes);
+    $sql = $queryBuild->getSql();
 }
-$queryBuild = new \app\logic\QueryBuilder('categories', $attributes);
-$sql = $queryBuild->getSql();
-
-print_r($sql);
+var_dump($category);
