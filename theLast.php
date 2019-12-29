@@ -1,14 +1,42 @@
 <?php
 
-use app\logic\TheLast;
+use app\logic\CreateArray;
+use app\models\Category;
+use app\models\Location;
+use app\models\Task;
+use app\models\User;
 
-ini_set('display_errors', 'On');
-error_reporting(E_ALL);
 require_once 'vendor/autoload.php';
 
-$loader = new \app\logic\CreateArray('data\categories.csv');
+$cat = new SplFileObject('data\categories.csv');
+$cat->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
+foreach ($cat as $row) {
+    $handle = fopen('data\categories.csv', 'r');
+    $header = fgetcsv($handle);
+    $y = array_combine($header, $row);
+    $queryBuild = new \app\logic\QueryBuilder('categories', $y);
+    $sql = $queryBuild->getSql();
+    var_dump($sql);
+}
 
-$loader ->createArray('data\categories.csv');
-foreach ($loader as [$id, $title, $icon]) {
-return $title;
+$user = new SplFileObject('data\users.csv');
+$user->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
+foreach ($user as $row) {
+    $handle = fopen('data\users.csv', 'r');
+    $header = fgetcsv($handle);
+    $y = array_combine($header, $row);
+    $queryBuild = new \app\logic\QueryBuilder('users', $y);
+    $sql = $queryBuild->getSql();
+    var_dump($sql);
+}
+
+$messages = new SplFileObject('data\messages.csv');
+$messages->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
+foreach ($messages as $row) {
+    $handle = fopen('data\messages.csv', 'r');
+    $header = fgetcsv($handle);
+    $y = array_combine($header, $row);
+    $queryBuild = new \app\logic\QueryBuilder('user_messages', $y);
+    $sql = $queryBuild->getSql();
+    var_dump($sql);
 }

@@ -25,6 +25,6 @@ class Parser
         while (($line = fgetcsv($handle, 0, ";")) !== FALSE) {
             $array_line_full[] = $line;
         }
-        return array_values($array_line_full);
+        return array_keys($array_line_full);
     }
 }

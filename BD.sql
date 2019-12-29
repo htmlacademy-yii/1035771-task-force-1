@@ -68,14 +68,15 @@ CREATE TABLE files (
 
 CREATE TABLE reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     task_id INT NOT NULL,
     score TINYINT NOT NULL,
-    comment TEXT NOT NULL
+    description TEXT NOT NULL
 );
 
 CREATE TABLE proposals (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    comment VARCHAR (1000) NULL,
+    description VARCHAR (1000) NULL,
     budget INT NULL,
     creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     executor_id INT NOT NULL,
@@ -97,8 +98,9 @@ CREATE TABLE user_messages (
     viewed TINYINT NOT NULL DEFAULT 0,
     sender_id INT NOT NULL,
     recipient_id INT NOT NULL,
-    message TEXT NOT NULL,
-    task_id INT NOT NULL
+    description TEXT NOT NULL,
+    task_id INT NOT NULL,
+    creation_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE tasks
