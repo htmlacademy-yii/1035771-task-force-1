@@ -6,13 +6,13 @@ namespace app\models;
 
 class Category
 {
-    private $id;
     private $title;
     private $icon;
+    private $id;
 
     public function loadCsvArray(array $array)
     {
-        $this->id = $array['category_number'];
+        $this->id = $array['category_id'];
         $this->title = $array['category_name'];
         $this->icon = $array['category_code'];
     }
