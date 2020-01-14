@@ -17,6 +17,7 @@ class QueryBuilder
 
     public function getSqlCategory($attributes)
     {
-        return "INSERT INTO categories (title, icon) VALUES ($attributes)";
+        $doneAttributes = "'" . $attributes . "'";
+        return "INSERT INTO categories (title, icon) VALUES ($doneAttributes)";
     }
 }
