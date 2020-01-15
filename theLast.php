@@ -1,22 +1,32 @@
 <?php
 
-use app\models\Category;
-use app\models\Location;
-use app\models\Task;
-use app\models\User;
-use app\logic\QueryBuilder;
+use app\logic\CategorySqlFileCreator;
+use app\logic\LocationSqlFileCreator;
+use app\logic\MessageSqlFileCreator;
+use app\logic\OpinionSqlFileCreator;
+use app\logic\ReplySqlFileCreator;
+use app\logic\TaskSqlFileCreator;
+use app\logic\UserSqlFileCreator;
 
 require_once 'vendor/autoload.php';
 
-$cat = new SplFileObject('data/categories.csv');
-$cat->setFlags(SplFileObject::READ_CSV | SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY | SplFileObject::DROP_NEW_LINE);
-$queryBuild = new QueryBuilder('categories');
-$header = $cat->fgetcsv();
-$firstRow = true;
-foreach ($cat as $row) {
-    if ($firstRow) { $firstRow = false; continue;}
-    $attributes = array_combine($header, $row);
-    $sql = $queryBuild->getSqlCategory(implode('\', \'', $attributes));
-    var_dump($sql);
-}
+$creator = new CategorySqlFileCreator(__DIR__ . '/data/categories.csv');
+$creator->execute();
 
+$creator1 = new LocationSqlFileCreator(__DIR__ . '/data/cities.csv');
+$creator1->execute();
+
+$creator2 = new UserSqlFileCreator(__DIR__ . '/data/users.csv');
+$creator2->execute();
+
+$creator3 = new TaskSqlFileCreator(__DIR__ . '/data/tasks.csv');
+$creator3->execute();
+
+$creator4 = new MessageSqlFileCreator(__DIR__ . '/data/messages.csv');
+$creator4->execute();
+
+$creator5 = new OpinionSqlFileCreator(__DIR__ . '/data/opinions.csv');
+$creator5->execute();
+
+$creator6 = new ReplySqlFileCreator(__DIR__ . '/data/replies.csv');
+$creator6->execute();
