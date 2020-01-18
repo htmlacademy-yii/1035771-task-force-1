@@ -24,7 +24,8 @@ CREATE TABLE users (
 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(128) NOT NULL
+    title VARCHAR(128) NOT NULL,
+    icon VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE users_categories (
@@ -67,14 +68,15 @@ CREATE TABLE files (
 
 CREATE TABLE reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     task_id INT NOT NULL,
     score TINYINT NOT NULL,
-    comment TEXT NOT NULL
+    description TEXT NOT NULL
 );
 
 CREATE TABLE proposals (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    comment VARCHAR (1000) NULL,
+    description VARCHAR (1000) NULL,
     budget INT NULL,
     creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     executor_id INT NOT NULL,
@@ -83,7 +85,9 @@ CREATE TABLE proposals (
 
 CREATE TABLE locations (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    city_id VARCHAR (64) NOT NULL,
+    city VARCHAR (64) NOT NULL,
+    lat DEC(10,7) NOT NULL,
+    length DEC(10,7) NOT NULL,
     region VARCHAR (128) NULL,
     street VARCHAR (500) NULL,
     district VARCHAR (500) NULL
@@ -94,8 +98,9 @@ CREATE TABLE user_messages (
     viewed TINYINT NOT NULL DEFAULT 0,
     sender_id INT NOT NULL,
     recipient_id INT NOT NULL,
-    message TEXT NOT NULL,
-    task_id INT NOT NULL
+    description TEXT NOT NULL,
+    task_id INT NOT NULL,
+    creation_time DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE tasks

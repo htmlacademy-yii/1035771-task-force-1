@@ -22,6 +22,50 @@ class Task
     private $customer_id;
     private $status;
 
+    private $id;
+    private $title;
+    private $description;
+    private $creation_time;
+    private $url_file;
+    private $deadline;
+    private $budget;
+    private $category;
+    private $location_id;
+
+    public function loadCsvArray(array $array): void
+    {
+        $this->id = $array['task_number'];
+        $this->title = $array['task_title'];
+        $this->description = $array['task_description'];
+        $this->creation_time = $array['task_dt_add'];
+        $this->url_file = $array['url_file'];
+        $this->deadline = $array['task_deadline'];
+        $this->budget = $array['task_budget'];
+        $this->category = $array['task_category'];
+        $this->location_id = $array['task_location'];
+        $this->customer_id = $array['task_customer'];
+        $this->executor_id = $array['task_executor'];
+        $this->status = $array['task_status'];
+    }
+
+    public function getAttributes()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'creation_time' => $this->creation_time,
+            'url_file' => $this->url_file,
+            'deadline' => $this->deadline,
+            'budget' => $this-> budget,
+            'category' => $this->category,
+            'location' => $this->location_id,
+            'customer' => $this->customer_id,
+            'executor' => $this->executor_id,
+            'status' => $this->status
+        ];
+    }
+
     public function __construct(int $customer_id)
     {
         $this->customer_id = $customer_id;
