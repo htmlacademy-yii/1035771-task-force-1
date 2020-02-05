@@ -4,7 +4,7 @@
 namespace app\models;
 
 
-class Category
+class CategoryFirst
 {
     private $title;
     private $icon;
