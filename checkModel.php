@@ -1,8 +1,9 @@
 <?php
-
-use app\models\Category;
+require_once 'vendor\autoload.php';
+use frontend\models\Category;
+use frontend\controllers\CategoryController;
+$cats = new CategoryController(2);
+$cats ->actionIndex();
 
 $cats = Category::findOne(2);
-echo $id = $cats->id;
-echo $icon =  $cats->icon;
 
