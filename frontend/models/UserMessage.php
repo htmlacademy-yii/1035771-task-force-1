@@ -67,4 +67,24 @@ class UserMessage extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Tasks::className(), ['id' => 'task_id']);
     }
+
+    /**
+     * Gets query for [[Sender]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSender()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'sender_id']);
+    }
+
+    /**
+     * Gets query for [[Recipient]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecipient()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'recipient_id']);
+    }
 }

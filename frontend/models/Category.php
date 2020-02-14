@@ -55,4 +55,9 @@ class Category extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Tasks::className(), ['category_id' => 'id']);
     }
+
+    public function getUsers() {
+        return $this->hasMany(Users::class, ['id' => 'user_id'])->viaTable('users_categories', ['category_id' => 'id']);
+    }
+
 }

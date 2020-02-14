@@ -45,4 +45,24 @@ class TaskFile extends \yii\db\ActiveRecord
             'task_id' => 'Task ID',
         ];
     }
+
+    /**
+     * Gets query for [[Tasks]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTasks()
+    {
+        return $this->hasMany(Tasks::className(), ['task_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Files]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(Files::className(), ['file_id' => 'id']);
+    }
 }

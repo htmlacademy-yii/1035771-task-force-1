@@ -41,4 +41,13 @@ class File extends \yii\db\ActiveRecord
             'url' => 'Url',
         ];
     }
+
+    public function getUsers() {
+        return $this->hasMany(Users::class, ['id' => 'user_id'])->viaTable('user_files', ['file_id' => 'id']);
+    }
+
+    public function getTasks() {
+        return $this->hasMany(Tasks::class, ['id' => 'task_id'])->viaTable('task_files', ['file_id' => 'id']);
+    }
+
 }

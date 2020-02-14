@@ -45,4 +45,25 @@ class UserFile extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
         ];
     }
+
+    /**
+     * Gets query for [[Users]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(Users::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Files]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFiles()
+    {
+        return $this->hasMany(Files::className(), ['file_id' => 'id']);
+    }
+
 }

@@ -92,22 +92,51 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Tasks]].
+     * Gets query for [[TaskCustomer]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTasks()
+    public function getTaskCustomer()
     {
         return $this->hasMany(Tasks::className(), ['customer_id' => 'id']);
     }
 
     /**
-     * Gets query for [[Tasks0]].
+     * Gets query for [[TasksExecutor]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTasks0()
+    public function getTasksExecutor()
     {
         return $this->hasMany(Tasks::className(), ['executor_id' => 'id']);
     }
+
+    public function getCategories() {
+        return $this->hasMany(Categories::class, ['id' => 'category_id'])->viaTable('users_categories', ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Sender]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSender()
+    {
+        return $this->hasMany(UserMessages::className(), ['sender_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Recipient]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRecipient()
+    {
+        return $this->hasMany(UserMessages::className(), ['recipient_id' => 'id']);
+    }
+
+    public function getFiles() {
+        return $this->hasMany(Files::class, ['id' => 'file_id'])->viaTable('user_files', ['user_id' => 'id']);
+    }
+
 }

@@ -134,4 +134,8 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasMany(UserMessages::className(), ['task_id' => 'id']);
     }
+
+    public function getFiles() {
+        return $this->hasMany(Files::class, ['id' => 'file_id'])->viaTable('task_files', ['task_id' => 'id']);
+    }
 }

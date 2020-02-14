@@ -44,4 +44,24 @@ class UserCategory extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
         ];
     }
+
+    /**
+     * Gets query for [[Users]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(Users::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Categories]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Categories::className(), ['category_id' => 'id']);
+    }
 }
