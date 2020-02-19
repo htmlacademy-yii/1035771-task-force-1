@@ -8,7 +8,12 @@ class UserController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $user = User::findOne(2);
-        return (implode(',', [$user->name, $user->email, $user->password]));
+        $users = User::find()
+            ->orderBy(['creation_time' => SORT_DESC])
+            ->all();
+
+        return $this->render('index', [
+            'users' => $users,
+        ]);
     }
 }

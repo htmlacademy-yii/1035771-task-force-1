@@ -43,11 +43,11 @@ class File extends \yii\db\ActiveRecord
     }
 
     public function getUsers() {
-        return $this->hasMany(Users::class, ['id' => 'user_id'])->viaTable('user_files', ['file_id' => 'id']);
+        return $this->hasMany(User::class, ['id' => 'user_id'])->viaTable('user_files', ['file_id' => 'id']);
     }
 
     public function getTasks() {
-        return $this->hasMany(Tasks::class, ['id' => 'task_id'])->viaTable('task_files', ['file_id' => 'id']);
+        return $this->hasMany(Task::class, ['id' => 'task_id'])->viaTable('task_files', ['file_id' => 'id']);
     }
 
 }

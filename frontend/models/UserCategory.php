@@ -52,7 +52,7 @@ class UserCategory extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['user_id' => 'id']);
+        return $this->hasMany(User::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -62,6 +62,6 @@ class UserCategory extends \yii\db\ActiveRecord
      */
     public function getCategories()
     {
-        return $this->hasMany(Categories::className(), ['category_id' => 'id']);
+        return $this->hasMany(Category::className(), ['category_id' => 'id']);
     }
 }

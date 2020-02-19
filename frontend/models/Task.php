@@ -82,7 +82,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getProposals()
     {
-        return $this->hasMany(Proposals::className(), ['task_id' => 'id']);
+        return $this->hasMany(Proposal::className(), ['task_id' => 'id']);
     }
 
     /**
@@ -92,7 +92,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getReviews()
     {
-        return $this->hasMany(Reviews::className(), ['task_id' => 'id']);
+        return $this->hasMany(Review::className(), ['task_id' => 'id']);
     }
 
     /**
@@ -102,7 +102,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(Users::className(), ['id' => 'customer_id']);
+        return $this->hasOne(User::className(), ['id' => 'customer_id']);
     }
 
     /**
@@ -112,7 +112,7 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getExecutor()
     {
-        return $this->hasOne(Users::className(), ['id' => 'executor_id']);
+        return $this->hasOne(User::className(), ['id' => 'executor_id']);
     }
 
     /**
@@ -120,9 +120,9 @@ class Task extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCategory()
+    public function getCategories()
     {
-        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 
     /**
@@ -132,10 +132,20 @@ class Task extends \yii\db\ActiveRecord
      */
     public function getUserMessages()
     {
-        return $this->hasMany(UserMessages::className(), ['task_id' => 'id']);
+        return $this->hasMany(UserMessage::className(), ['task_id' => 'id']);
     }
 
     public function getFiles() {
-        return $this->hasMany(Files::class, ['id' => 'file_id'])->viaTable('task_files', ['task_id' => 'id']);
+        return $this->hasMany(File::class, ['id' => 'file_id'])->viaTable('task_files', ['task_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Location]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocations()
+    {
+        return $this->hasOne(Location::className(), ['id' => 'location_id']);
     }
 }
