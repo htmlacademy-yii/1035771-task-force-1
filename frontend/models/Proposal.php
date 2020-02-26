@@ -64,7 +64,7 @@ class Proposal extends \yii\db\ActiveRecord
      */
     public function getExecutor()
     {
-        return $this->hasOne(Users::className(), ['id' => 'executor_id']);
+        return $this->hasOne(User::className(), ['id' => 'executor_id']);
     }
 
     /**
@@ -74,6 +74,6 @@ class Proposal extends \yii\db\ActiveRecord
      */
     public function getTask()
     {
-        return $this->hasOne(Tasks::className(), ['id' => 'task_id']);
+        return $this->hasOne(Task::className(), ['id' => 'task_id']);
     }
 }

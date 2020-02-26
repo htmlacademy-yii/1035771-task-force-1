@@ -53,7 +53,7 @@ class TaskFile extends \yii\db\ActiveRecord
      */
     public function getTasks()
     {
-        return $this->hasMany(Tasks::className(), ['task_id' => 'id']);
+        return $this->hasMany(Task::className(), ['task_id' => 'id']);
     }
 
     /**
@@ -63,6 +63,6 @@ class TaskFile extends \yii\db\ActiveRecord
      */
     public function getFiles()
     {
-        return $this->hasMany(Files::className(), ['file_id' => 'id']);
+        return $this->hasMany(File::className(), ['file_id' => 'id']);
     }
 }

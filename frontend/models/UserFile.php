@@ -53,7 +53,7 @@ class UserFile extends \yii\db\ActiveRecord
      */
     public function getUsers()
     {
-        return $this->hasMany(Users::className(), ['user_id' => 'id']);
+        return $this->hasMany(User::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -63,7 +63,7 @@ class UserFile extends \yii\db\ActiveRecord
      */
     public function getFiles()
     {
-        return $this->hasMany(Files::className(), ['file_id' => 'id']);
+        return $this->hasMany(File::className(), ['file_id' => 'id']);
     }
 
 }

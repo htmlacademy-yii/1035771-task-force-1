@@ -88,7 +88,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getProposals()
     {
-        return $this->hasMany(Proposals::className(), ['executor_id' => 'id']);
+        return $this->hasMany(Proposal::className(), ['executor_id' => 'id']);
     }
 
     /**
@@ -98,7 +98,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getTaskCustomer()
     {
-        return $this->hasMany(Tasks::className(), ['customer_id' => 'id']);
+        return $this->hasMany(Task::className(), ['customer_id' => 'id']);
     }
 
     /**
@@ -108,11 +108,11 @@ class User extends \yii\db\ActiveRecord
      */
     public function getTasksExecutor()
     {
-        return $this->hasMany(Tasks::className(), ['executor_id' => 'id']);
+        return $this->hasMany(Task::className(), ['executor_id' => 'id']);
     }
 
     public function getCategories() {
-        return $this->hasMany(Categories::class, ['id' => 'category_id'])->viaTable('users_categories', ['user_id' => 'id']);
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->viaTable('users_categories', ['user_id' => 'id']);
     }
 
     /**
@@ -122,7 +122,7 @@ class User extends \yii\db\ActiveRecord
      */
     public function getSender()
     {
-        return $this->hasMany(UserMessages::className(), ['sender_id' => 'id']);
+        return $this->hasMany(UserMessage::className(), ['sender_id' => 'id']);
     }
 
     /**
@@ -132,11 +132,11 @@ class User extends \yii\db\ActiveRecord
      */
     public function getRecipient()
     {
-        return $this->hasMany(UserMessages::className(), ['recipient_id' => 'id']);
+        return $this->hasMany(UserMessage::className(), ['recipient_id' => 'id']);
     }
 
     public function getFiles() {
-        return $this->hasMany(Files::class, ['id' => 'file_id'])->viaTable('user_files', ['user_id' => 'id']);
+        return $this->hasMany(File::class, ['id' => 'file_id'])->viaTable('user_files', ['user_id' => 'id']);
     }
 
 }

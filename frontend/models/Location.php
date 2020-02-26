@@ -54,4 +54,14 @@ class Location extends \yii\db\ActiveRecord
             'district' => 'District',
         ];
     }
+
+    /**
+     * Gets query for [[Tasks]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTasks()
+    {
+        return $this->hasMany(Task::className(), ['task_id' => 'id']);
+    }
 }
