@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use frontend\models\Category;
+use frontend\models\Task;
 use frontend\models\User;
 
 class UserController extends \yii\web\Controller
@@ -12,8 +14,9 @@ class UserController extends \yii\web\Controller
             ->orderBy(['creation_time' => SORT_DESC])
             ->all();
 
+
         return $this->render('index', [
-            'users' => $users,
+            'users' => $users
         ]);
     }
 }

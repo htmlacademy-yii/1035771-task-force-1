@@ -19,7 +19,7 @@
                         </p>
                         <b class="new-task__price new-task__price--translation"><?=$value->budget;?><b> ₽</b></b>
                         <p class="new-task__place"><?=$value->locations->city;?></p>
-                        <span class="new-task__time"><?=$value->creation_time; ?></span>
+                        <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($value->creation_time); ?></span>
                     </div>
                     <?php endforeach?>
             </section>
