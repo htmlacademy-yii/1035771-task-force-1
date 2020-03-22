@@ -19,7 +19,8 @@ CREATE TABLE users (
     notification_new_message TINYINT NOT NULL DEFAULT 0,
     notification_task_action TINYINT NOT NULL DEFAULT 0,
     notification_review TINYINT NOT NULL DEFAULT 0,
-    show_for_customers TINYINT NOT NULL DEFAULT 0
+    show_for_customers TINYINT NOT NULL DEFAULT 0,
+    last_active_time DATETIME
 );
 
 CREATE TABLE categories (

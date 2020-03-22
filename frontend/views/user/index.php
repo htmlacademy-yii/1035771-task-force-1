@@ -47,7 +47,7 @@ use frontend\models\Category;
                                 <?=$user->info?>
                             </p>
                         </div>
-                        <span class="new-task__time">Был на сайте 25 минут назад</span>
+                        <span class="new-task__time">Был на сайте <?= Yii::$app->formatter->asRelativeTime($user->last_active_time); ?></span>
                     </div>
 
                     <div class="link-specialization user__search-link--bottom">

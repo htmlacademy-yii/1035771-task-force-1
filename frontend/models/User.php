@@ -24,6 +24,7 @@ use Yii;
  * @property int $notification_task_action
  * @property int $notification_review
  * @property int $show_for_customers
+ * @property string $last_active_time
  *
  * @property Proposals[] $proposals
  * @property Tasks[] $tasks
@@ -46,7 +47,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'password', 'location_id'], 'required'],
-            [['creation_time', 'birthday'], 'safe'],
+            [['creation_time', 'birthday', 'last_active_time'], 'safe'],
             [['info'], 'string'],
             [['views', 'location_id', 'notification_new_message', 'notification_task_action', 'notification_review', 'show_for_customers'], 'integer'],
             [['name', 'email', 'password', 'phone', 'skype', 'other_contact'], 'string', 'max' => 128],
@@ -78,6 +79,7 @@ class User extends \yii\db\ActiveRecord
             'notification_task_action' => 'Notification Task Action',
             'notification_review' => 'Notification Review',
             'show_for_customers' => 'Show For Customers',
+            'last_active_time' => 'Last Active Time',
         ];
     }
 

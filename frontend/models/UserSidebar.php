@@ -19,7 +19,7 @@ class UserSidebar extends Model
             'free' => 'Сейчас свободен',
             'online' => 'Сейчас онлайн',
             'review' => 'Есть отзывы',
-            'search' => 'Поиск по названию',
+            'search' => 'Поиск по описанию',
         ];
     }
 
@@ -29,6 +29,4 @@ class UserSidebar extends Model
             [['categories', 'free', 'online', 'review', 'search'], 'safe'],
         ];
     }
-
-
 }
