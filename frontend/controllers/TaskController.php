@@ -20,7 +20,7 @@ class TaskController extends Controller
             ->orderBy(['creation_time' => SORT_DESC]);
 
         $model = new TaskSidebar();
-        $model->load($_GET);
+        $model->load(Yii::$app->request->get());
 
         foreach ($model as $key=>$value) {
             if ($value) {

@@ -61,7 +61,7 @@ use frontend\models\Category;
             <section  class="search-task">
                 <div class="search-task__wrapper">
 
-                        <?php $form=ActiveForm::begin(['id' => 'search-task-form', 'options' => ['class' => 'search-task__form'], 'method'=>'get']); ?>
+                    <?php $form=ActiveForm::begin(['id' => 'search-task-form', 'options' => ['class' => 'search-task__form'], 'method'=>'get']); ?>
                         <fieldset class="search-task__categories">
                             <legend>Категории</legend>
 
@@ -77,24 +77,28 @@ use frontend\models\Category;
                         </fieldset>
                         <fieldset class="search-task__categories">
                             <legend>Дополнительно</legend>
+
                             <?php echo $form->field($model2, 'free', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
-                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);?>
+                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);
+                            ?>
 
 
                             <?php echo $form->field($model2, 'online', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
-                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);?>
+                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);
+                            ?>
 
                             <?php echo $form->field($model2, 'review', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
-                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);?>
+                                ->checkbox(['class' => 'visually-hidden checkbox__input'], false);
+                            ?>
 
                         </fieldset>
 
