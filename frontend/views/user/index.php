@@ -8,8 +8,8 @@ use frontend\models\Category;
 <head>
     <meta charset="UTF-8">
     <title>TaskForce</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <div class="table-layout">
@@ -35,7 +35,7 @@ use frontend\models\Category;
                     <?php foreach ($users as $user): ?>
                     <div class="feedback-card__top">
                         <div class="user__search-icon">
-                            <a href="#"><img src="./img/man-glasses.jpg" width="65" height="65"></a>
+                            <a href="#"><img src="/img/man-glasses.jpg" width="65" height="65"></a>
                             <span>17 заданий</span>
                             <span><?=$user->views?> отзывов</span>
                         </div>
