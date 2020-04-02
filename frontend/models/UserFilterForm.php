@@ -4,7 +4,7 @@
 namespace frontend\models;
 
 use yii\base\Model;
-class UserSidebar extends Model
+class UserFilterForm extends Model
 {
     public $categories;
     public $free;

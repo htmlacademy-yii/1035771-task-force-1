@@ -149,4 +149,43 @@ class Task extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Location::className(), ['id' => 'location_id']);
     }
+
+    public function findByFilterForm($formTask) {
+
+        $task = Task::find()
+            ->where(['status' => '0'])
+            ->joinWith('locations')
+            ->joinWith('categories')
+            ->joinWith('proposals')
+            ->orderBy('tasks.creation_time DESC');
+
+        foreach ($formTask as $key=>$value) {
+            if ($value) {
+                switch ($key) {
+                    case ('categories'):
+                        $task->andWhere(['category_id' => $value]);
+                        break;
+
+                    case ('withoutProposals'):
+                        $task->andWhere(['proposals.task_id' => NULL]);
+                        break;
+
+                    case ('remote'):
+                        $task->andWhere(['tasks.location_id' => NULL]);
+                        break;
+
+                    case ('period'):
+                        $task->andWhere(['>=', 'tasks.creation_time', $formTask->getPeriodTime($value)]);
+                        break;
+
+                    case ('search'):
+                        $task->andWhere(['LIKE', 'tasks.title', $value]);
+                        break;
+                }
+            }
+        }
+
+        return $task->all();
+
+    }
 }

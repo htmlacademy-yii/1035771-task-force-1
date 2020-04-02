@@ -4,7 +4,7 @@
 namespace frontend\models;
 
 use yii\base\Model;
-class TaskSidebar extends Model
+class TaskFilterForm extends Model
 {
      public $categories;
      public $withoutProposals;
@@ -12,7 +12,12 @@ class TaskSidebar extends Model
      public $period;
      public $search;
 
-     public $availableTime = ['day'=>'1 day', 'week'=>'1 week', 'month'=>'1 month', 'all'=>'1000 year'];
+     const PERIOD_DAY = 'day';
+     const PERIOD_WEEK = 'week';
+     const PERIOD_MONTH = 'month';
+     const PERIOD_ALL = 'all';
+
+     private $availableTime = [self::PERIOD_DAY=>'1 day', self::PERIOD_WEEK=>'1 week', self::PERIOD_MONTH=>'1 month', self::PERIOD_ALL=>'1000 year'];
 
     public function attributeLabels()
     {

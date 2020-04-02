@@ -10,19 +10,19 @@ use frontend\models\Category;
             <section class="new-task">
                 <div class="new-task__wrapper">
                     <h1>Новые задания</h1>
-                    <?php foreach ($task as $value): ?>
+                    <?php foreach ($tasks as $task): ?>
                     <div class="new-task__card">
                         <div class="new-task__title">
-                            <a href="#" class="link-regular"><h2><?=$value->title;?></h2></a>
-                            <a  class="new-task__type link-regular" href="#"><p><?=$value->categories->title;?></p></a>
+                            <a href="#" class="link-regular"><h2><?=$task->title;?></h2></a>
+                            <a  class="new-task__type link-regular" href="#"><p><?=$task->categories->title;?></p></a>
                         </div>
-                        <div class="new-task__icon new-task__icon--<?=$value->categories->icon;?>"></div>
+                        <div class="new-task__icon new-task__icon--<?=$task->categories->icon;?>"></div>
                         <p class="new-task_description">
-                            <?=$value->description;?>
+                            <?=$task->description;?>
                         </p>
-                        <b class="new-task__price new-task__price--translation"><?=$value->budget;?><b> ₽</b></b>
-                        <p class="new-task__place"><?=$value->locations->city;?></p>
-                        <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($value->creation_time); ?></span>
+                        <b class="new-task__price new-task__price--translation"><?=$task->budget;?><b> ₽</b></b>
+                        <p class="new-task__place"><?=$task->locations->city ?? 'Удалённо';?></p>
+                        <span class="new-task__time"><?= Yii::$app->formatter->asRelativeTime($task->creation_time); ?></span>
                     </div>
                     <?php endforeach?>
             </section>
@@ -32,9 +32,9 @@ use frontend\models\Category;
                     <fieldset class="search-task__categories">
                         <legend>Категории</legend>
 
-                        <?php echo $form->field($model, 'categories')
+                        <?php echo $form->field($formTask, 'categories')
                             ->checkboxList(Category::find()->select(['title', 'id'])->indexBy('id')->column(),
-                                ['item' => function ($index, $label, $name, $checked, $value) use ($model) {
+                                ['item' => function ($index, $label, $name, $checked, $value) use ($formTask) {
                                 $checked = $checked ? 'checked':'';
                                 return '<input class="visually-hidden checkbox__input" id="categories_' . $value . '" type="checkbox" name="' . $name . '" value="' . $value . '"' . $checked . '>
                                         <label for="categories_' . $value . '">' . $label . '</label>';
@@ -45,14 +45,14 @@ use frontend\models\Category;
                     <fieldset class="search-task__categories">
                         <legend>Дополнительно</legend>
 
-                        <?php echo $form->field($model, 'withoutProposals', [
+                        <?php echo $form->field($formTask, 'withoutProposals', [
                         'template' => '{input}{label}',
                         'options' => ['class' => ''],
                     ])
                         ->checkbox(['class' => 'visually-hidden checkbox__input'], false);
                         ?>
 
-                        <?php echo $form->field($model, 'remote', [
+                        <?php echo $form->field($formTask, 'remote', [
                             'template' => '{input}{label}',
                             'options' => ['class' => ''],
                         ])
@@ -61,20 +61,20 @@ use frontend\models\Category;
 
                     </fieldset>
 
-                        <?php echo $form->field($model, 'period', [
-                            'template' => '{label}{input}',
-                            'options' => ['class' => ''],
-                            'labelOptions' => ['class' => 'search-task__name']
-                        ])
-                            ->dropDownList([
-                                'all'=>'За всё время',
-                                'day'=>'За день',
-                                'week'=>'За неделю',
-                                'month'=>'За месяц',
-                                ],
-                                ['class' => 'multiple-select input', 'style' => 'display: block']);?>
+                    <?php echo $form->field($formTask, 'period', [
+                        'template' => '{label}{input}',
+                        'options' => ['class' => ''],
+                        'labelOptions' => ['class' => 'search-task__name']
+                    ])
+                        ->dropDownList([
+                            'all'=>'За всё время',
+                            'day'=>'За день',
+                            'week'=>'За неделю',
+                            'month'=>'За месяц',
+                        ],
+                            ['class' => 'multiple-select input', 'style' => 'display: block']);?>
 
-                        <?php echo $form->field($model, 'search', [
+                        <?php echo $form->field($formTask, 'search', [
                             'template' => '{label}{input}',
                             'options' => ['class' => ''],
                             'labelOptions' => ['class' => 'search-task__name', 'style' => 'display: block;']

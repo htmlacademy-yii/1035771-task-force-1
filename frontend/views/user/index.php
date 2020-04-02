@@ -65,9 +65,9 @@ use frontend\models\Category;
                         <fieldset class="search-task__categories">
                             <legend>Категории</legend>
 
-                            <?php echo $form->field($model2, 'categories')
+                            <?php echo $form->field($formUser, 'categories')
                                 ->checkboxList(Category::find()->select(['title', 'id'])->indexBy('id')->column(),
-                                    ['item' => function ($index, $label, $name, $checked, $value) use ($model) {
+                                    ['item' => function ($index, $label, $name, $checked, $value) use ($formUser) {
                                         $checked = $checked ? 'checked':'';
                                         return '<input class="visually-hidden checkbox__input" id="categories_' . $value . '" type="checkbox" name="' . $name . '" value="' . $value . '"' . $checked . '>
                                         <label for="categories_' . $value . '">' . $label . '</label>';
@@ -78,7 +78,7 @@ use frontend\models\Category;
                         <fieldset class="search-task__categories">
                             <legend>Дополнительно</legend>
 
-                            <?php echo $form->field($model2, 'free', [
+                            <?php echo $form->field($formUser, 'free', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
@@ -86,14 +86,14 @@ use frontend\models\Category;
                             ?>
 
 
-                            <?php echo $form->field($model2, 'online', [
+                            <?php echo $form->field($formUser, 'online', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
                                 ->checkbox(['class' => 'visually-hidden checkbox__input'], false);
                             ?>
 
-                            <?php echo $form->field($model2, 'review', [
+                            <?php echo $form->field($formUser, 'review', [
                                 'template' => '{input}{label}',
                                 'options' => ['class' => ''],
                             ])
@@ -102,7 +102,7 @@ use frontend\models\Category;
 
                         </fieldset>
 
-                    <?php echo $form->field($model2, 'search', [
+                    <?php echo $form->field($formUser, 'search', [
                         'template' => '{label}{input}',
                         'options' => ['class' => ''],
                         'labelOptions' => ['class' => 'search-task__name', 'style' => 'display: block;']
