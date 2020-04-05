@@ -6,18 +6,16 @@ namespace frontend\models;
 use yii\base\Model;
 class TaskFilterForm extends Model
 {
-     public $categories;
-     public $withoutProposals;
-     public $remote;
-     public $period;
-     public $search;
+    public $categories;
+    public $withoutProposals;
+    public $remote;
+    public $period;
+    public $search;
 
-     const PERIOD_DAY = 'day';
-     const PERIOD_WEEK = 'week';
-     const PERIOD_MONTH = 'month';
-     const PERIOD_ALL = 'all';
-
-     private $availableTime = [self::PERIOD_DAY=>'1 day', self::PERIOD_WEEK=>'1 week', self::PERIOD_MONTH=>'1 month', self::PERIOD_ALL=>'1000 year'];
+    const PERIOD_DAY = '1 day';
+    const PERIOD_WEEK = '1 week';
+    const PERIOD_MONTH = '1 month';
+    const PERIOD_ALL = '1000 year';
 
     public function attributeLabels()
     {
@@ -40,7 +38,7 @@ class TaskFilterForm extends Model
     public function getPeriodTime($period)
     {
         $date = new \DateTime();
-        $date->sub(\DateInterval::createFromDateString($this->availableTime[$period]));
+        $date->sub(\DateInterval::createFromDateString($period));
         return $date->format('Y-m-d H:i:s');
     }
 }

@@ -1,4 +1,6 @@
 <?php
+
+use frontend\models\TaskFilterForm;
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
 ?>
@@ -67,10 +69,10 @@ use frontend\models\Category;
                         'labelOptions' => ['class' => 'search-task__name']
                     ])
                         ->dropDownList([
-                            'all'=>'За всё время',
-                            'day'=>'За день',
-                            'week'=>'За неделю',
-                            'month'=>'За месяц',
+                            TaskFilterForm::PERIOD_ALL=>'За всё время',
+                            TaskFilterForm::PERIOD_DAY=>'За день',
+                            TaskFilterForm::PERIOD_WEEK=>'За неделю',
+                            TaskFilterForm::PERIOD_MONTH=>'За месяц',
                         ],
                             ['class' => 'multiple-select input', 'style' => 'display: block']);?>
 
