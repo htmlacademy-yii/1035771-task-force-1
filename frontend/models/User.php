@@ -24,6 +24,7 @@ use Yii;
  * @property int $notification_task_action
  * @property int $notification_review
  * @property int $show_for_customers
+ * @property string $last_active_time
  *
  * @property Proposals[] $proposals
  * @property Tasks[] $tasks
@@ -46,7 +47,7 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'password', 'location_id'], 'required'],
-            [['creation_time', 'birthday'], 'safe'],
+            [['creation_time', 'birthday', 'last_active_time'], 'safe'],
             [['info'], 'string'],
             [['views', 'location_id', 'notification_new_message', 'notification_task_action', 'notification_review', 'show_for_customers'], 'integer'],
             [['name', 'email', 'password', 'phone', 'skype', 'other_contact'], 'string', 'max' => 128],
@@ -78,6 +79,7 @@ class User extends \yii\db\ActiveRecord
             'notification_task_action' => 'Notification Task Action',
             'notification_review' => 'Notification Review',
             'show_for_customers' => 'Show For Customers',
+            'last_active_time' => 'Last Active Time',
         ];
     }
 
@@ -139,4 +141,40 @@ class User extends \yii\db\ActiveRecord
         return $this->hasMany(File::class, ['id' => 'file_id'])->viaTable('user_files', ['user_id' => 'id']);
     }
 
+    public function findByFilterForm($formUser) {
+
+        $user = User::find()
+            ->orderBy('users.creation_time DESC');
+
+        foreach ($formUser as $key => $value) {
+            if ($value) {
+                switch ($key) {
+
+                    case 'categories':
+                        $user = $user->joinWith('categories')
+                            ->andWhere([UserCategory::tableName().'.category_id' => $formUser->categories]);
+                        break;
+
+                    case 'review':
+                        $user = $user->andWhere('users.views != 0');
+                        break;
+
+                    case 'online':
+                        $user->andWhere(['>', 'users.last_active_time', date("Y-m-d H:i:s", strtotime("- 1 hour"))]);
+                        break;
+
+                    case 'free':
+                        $user=$user->joinWith('tasksExecutor')
+                            ->andWhere(['or',['tasks.id' => NULL], 'tasks.status = 1']);
+                        break;
+
+                    case 'search':
+                        $user->andWhere(['LIKE', 'users.info', $value]);
+                        break;
+                }
+            }
+        }
+
+    return $user->all();
+    }
 }

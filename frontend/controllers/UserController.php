@@ -2,21 +2,24 @@
 
 namespace frontend\controllers;
 
-use frontend\models\Category;
-use frontend\models\Task;
+use frontend\models\UserCategory;
+use Yii;
 use frontend\models\User;
+use frontend\models\UserFilterForm;
+use yii\web\Controller;
 
-class UserController extends \yii\web\Controller
+class UserController extends Controller
 {
     public function actionIndex()
     {
-        $users = User::find()
-            ->orderBy(['creation_time' => SORT_DESC])
-            ->all();
 
+        $formUser = new UserFilterForm();
+        $formUser->load(Yii::$app->request->get());
+        $users = (new User)->findByFilterForm($formUser);
 
         return $this->render('index', [
-            'users' => $users
+            'users' => $users,
+            'formUser' => $formUser,
         ]);
     }
 }
