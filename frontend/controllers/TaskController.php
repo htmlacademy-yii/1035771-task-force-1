@@ -2,10 +2,13 @@
 
 namespace frontend\controllers;
 
+use frontend\models\User;
 use Yii;
 use frontend\models\Task;
 use yii\web\Controller;
 use frontend\models\TaskFilterForm;
+use yii\web\NotFoundHttpException;
+
 
 class TaskController extends Controller
 {
@@ -19,6 +22,17 @@ class TaskController extends Controller
         return $this->render('index',[
             'tasks' => $tasks,
             'formTask' => $formTask]);
+    }
+
+    public function actionView($id) {
+
+       $taskOne = Task::findOne($id);
+
+       if (!$taskOne) {
+           throw new NotFoundHttpException("Задание с ID $id не найдено");
+       }
+
+        return $this->render('view', ['taskOne'=>$taskOne]);
     }
 
 }

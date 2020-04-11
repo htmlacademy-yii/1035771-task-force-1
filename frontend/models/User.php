@@ -84,6 +84,16 @@ class User extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Locations]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLocations()
+    {
+        return $this->hasOne(Location::className(), ['id' => 'location_id']);
+    }
+
+    /**
      * Gets query for [[Proposals]].
      *
      * @return \yii\db\ActiveQuery
@@ -91,6 +101,26 @@ class User extends \yii\db\ActiveRecord
     public function getProposals()
     {
         return $this->hasMany(Proposal::className(), ['executor_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ReviewCustomer]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReviewCustomer()
+    {
+        return $this->hasMany(Review::className(), ['customer_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[ReviewExecutor]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReviewExecutor()
+    {
+        return $this->hasMany(Review::className(), ['executor_id' => 'id']);
     }
 
     /**

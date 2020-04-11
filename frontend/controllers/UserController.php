@@ -7,6 +7,7 @@ use Yii;
 use frontend\models\User;
 use frontend\models\UserFilterForm;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -22,4 +23,16 @@ class UserController extends Controller
             'formUser' => $formUser,
         ]);
     }
+
+    public function actionView($id) {
+
+        $userOne = User::findOne($id);
+
+        if (!$userOne) {
+            throw new NotFoundHttpException("Пользователь с ID $id не найден");
+        }
+
+        return $this->render('view', ['userOne'=>$userOne]);
+    }
+
 }
