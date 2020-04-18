@@ -3,6 +3,7 @@
 use frontend\models\TaskFilterForm;
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
+Yii::$app->language = 'ru-RU';
 ?>
 
 <body>

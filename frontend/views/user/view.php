@@ -1,3 +1,7 @@
+<?php
+Yii::$app->language = 'ru-RU';
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
