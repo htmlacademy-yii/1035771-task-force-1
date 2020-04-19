@@ -26,13 +26,13 @@ class TaskController extends Controller
 
     public function actionView($id) {
 
-       $taskOne = Task::findOne($id);
+       $task = Task::findOne($id);
 
-       if (!$taskOne) {
+       if (!$task) {
            throw new NotFoundHttpException("Задание с ID $id не найдено");
        }
 
-        return $this->render('view', ['taskOne'=>$taskOne]);
+        return $this->render('view', ['task'=>$task]);
     }
 
 }

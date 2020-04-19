@@ -1,7 +1,3 @@
-<?php
-Yii::$app->language = 'ru-RU';
-?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -21,23 +17,23 @@ Yii::$app->language = 'ru-RU';
                     <div class="content-view__card-wrapper">
                         <div class="content-view__header">
                             <div class="content-view__headline">
-                                <h1><?=$taskOne['title'];?></h1>
+                                <h1><?=$task['title'];?></h1>
                                 <span>Размещено в категории
-                                    <a href="#" class="link-regular"><?=$taskOne->categories->title;?></a>
-                                    <?= Yii::$app->formatter->asRelativeTime($taskOne['creation_time']); ?></span>
+                                    <a href="#" class="link-regular"><?=$task->categories->title;?></a>
+                                    <?= Yii::$app->formatter->asRelativeTime($task['creation_time']); ?></span>
                             </div>
-                            <b class="new-task__price new-task__price--clean content-view-price"><?=$taskOne['budget'];?><b> ₽</b></b>
-                            <div class="new-task__icon new-task__icon--<?=$taskOne->categories->icon;?> content-view-icon"></div>
+                            <b class="new-task__price new-task__price--clean content-view-price"><?=$task['budget'];?><b> ₽</b></b>
+                            <div class="new-task__icon new-task__icon--<?=$task->categories->icon;?> content-view-icon"></div>
                         </div>
                         <div class="content-view__description">
                             <h3 class="content-view__h3">Общее описание</h3>
                             <p>
-                                <?=$taskOne['description'];?>
+                                <?=$task['description'];?>
                             </p>
                         </div>
                         <div class="content-view__attach">
                             <h3 class="content-view__h3">Вложения</h3>
-                            <?php foreach ($taskOne->files as $attachment): ?>
+                            <?php foreach ($task->files as $attachment): ?>
                             <a href="<?=$attachment['url'] ?>" download><?=$attachment['url'];?></a>
                             <?php endforeach?>
                         </div>
@@ -66,9 +62,9 @@ Yii::$app->language = 'ru-RU';
                     </div>
                 </div>
                 <div class="content-view__feedback">
-                    <h2>Отклики <span>(<?= count($taskOne->proposals); ?>)</span></h2>
+                    <h2>Отклики <span>(<?= count($task->proposals); ?>)</span></h2>
                     <div class="content-view__feedback-wrapper">
-                        <?php foreach ($taskOne->proposals as $propose): ?>
+                        <?php foreach ($task->proposals as $propose): ?>
                         <div class="content-view__feedback-card">
                             <div class="feedback-card__top">
                                 <a href="#"><img src="/img/man-glasses.jpg" width="55" height="55"></a>
@@ -103,11 +99,11 @@ Yii::$app->language = 'ru-RU';
                         <div class="profile-mini__top">
                             <img src="/img/man-brune.jpg" width="62" height="62" alt="Аватар заказчика">
                             <div class="profile-mini__name five-stars__rate">
-                                <p><?=$taskOne->customer->name;?></p>
+                                <p><?=$task->customer->name;?></p>
                             </div>
                         </div>
-                        <p class="info-customer"><span><?= count($taskOne->customer->taskCustomer); ?> заданий</span><span class="last-"><?= Yii::$app->formatter->asRelativeTime($taskOne->customer->creation_time); ?> зарегистрирован на сайте</span></p>
-                        <a href="/user/view/<?= $taskOne->customer->id ?>" class="link-regular">Смотреть профиль</a>
+                        <p class="info-customer"><span><?= count($task->customer->taskCustomer); ?> заданий</span><span class="last-"><?= Yii::$app->formatter->asRelativeTime($task->customer->creation_time); ?> зарегистрирован на сайте</span></p>
+                        <a href="/user/view/<?= $task->customer->id ?>" class="link-regular">Смотреть профиль</a>
                     </div>
                 </div>
                 <div class="connect-desk__chat">

@@ -26,13 +26,13 @@ class UserController extends Controller
 
     public function actionView($id) {
 
-        $userOne = User::findOne($id);
+        $user = User::findOne($id);
 
-        if (!$userOne) {
+        if (!$user) {
             throw new NotFoundHttpException("Пользователь с ID $id не найден");
         }
 
-        return $this->render('view', ['userOne'=>$userOne]);
+        return $this->render('view', ['user'=>$user]);
     }
 
 }

@@ -1,7 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
-Yii::$app->language = 'ru-RU';
 ?>
 
 <!DOCTYPE html>
