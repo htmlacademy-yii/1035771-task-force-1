@@ -15,7 +15,7 @@ use frontend\models\Category;
                     <?php foreach ($tasks as $task): ?>
                     <div class="new-task__card">
                         <div class="new-task__title">
-                            <a href="#" class="link-regular"><h2><?=$task->title;?></h2></a>
+                            <a href="/task/view/<?php echo $task->id?>" class="link-regular"><h2><?=$task->title;?></h2></a>
                             <a  class="new-task__type link-regular" href="#"><p><?=$task->categories->title;?></p></a>
                         </div>
                         <div class="new-task__icon new-task__icon--<?=$task->categories->icon;?>"></div>

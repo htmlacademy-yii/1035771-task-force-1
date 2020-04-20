@@ -64,4 +64,9 @@ class Location extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Task::className(), ['task_id' => 'id']);
     }
+
+    public function getUsers()
+    {
+        return $this->hasMany(User::className(), ['location_id' => 'id']);
+    }
 }
