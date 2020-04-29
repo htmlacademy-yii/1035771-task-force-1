@@ -30,7 +30,7 @@ AppAsset::register($this);
     <header class="page-header">
         <div class="main-container page-header__container">
             <div class="page-header__logo">
-                <a href="#">
+                <a href="/">
                     <svg class="page-header__logo-image" id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1634 646.35">
                         <title>taskforce_logo2-01</title>
                         <g>
@@ -57,6 +57,7 @@ AppAsset::register($this);
                     </svg>
                 </a>
             </div>
+            <?php if (!in_array(Yii::$app->controller->id, ['registration'])): ?>
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
@@ -121,6 +122,7 @@ AppAsset::register($this);
                     </li>
                 </ul>
             </div>
+            <?php endif;?>
         </div>
     </header>
 
@@ -135,7 +137,7 @@ AppAsset::register($this);
         </div>
 
     </main>
-
+    <?php if (!in_array(Yii::$app->controller->id, ['registration'])): ?>
     <footer class="page-footer">
         <div class="main-container page-footer__container">
             <div class="page-footer__info">
@@ -180,6 +182,8 @@ AppAsset::register($this);
             </div>
         </div>
     </footer>
+    <?php endif;?>
+
 </div>
 
 </body>

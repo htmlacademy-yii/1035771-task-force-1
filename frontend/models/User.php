@@ -207,4 +207,10 @@ class User extends \yii\db\ActiveRecord
 
     return $user->all();
     }
+
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
+
 }
