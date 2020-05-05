@@ -1,8 +1,6 @@
 <?php
 use yii\helpers\Html;
-use frontend\models\Registration;
 use yii\widgets\ActiveForm;
-use yii\widgets\ActiveField;
 use frontend\models\Location;
 ?>
 
@@ -23,10 +21,10 @@ use frontend\models\Location;
                 <h1>Регистрация аккаунта</h1>
 
                 <div class="registration-wrapper">
-                    <?php $form=ActiveForm::begin(['id' => 'registration-form',  'enableAjaxValidation' => true, 'options' => ['class' => 'registration__user-form form-create'], 'method' => 'post']); ?>
+                    <?php $form=ActiveForm::begin(['id' => 'registration-form',  'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'registration__user-form form-create'], 'method' => 'post']); ?>
+                    <?=$form->errorSummary($userRegistration);?>
 
-
-                        <?php echo $form->field($userRegistration, 'email', [
+                        <?= $form->field($userRegistration, 'email', [
                             'template' => '{label}{input}',
                         ])
                             ->input('text', ['class' => 'input textarea', 'type' => 'email','placeholder' => "kumarm@mail.ru", 'style' => 'width: 90%']);
@@ -34,16 +32,14 @@ use frontend\models\Location;
                         ?>
                         <span>Введите валидный адрес электронной почты</span><br><br>
 
-
-                        <?php echo $form->field($userRegistration, 'name', [
+                        <?= $form->field($userRegistration, 'name', [
                             'template' => '{label}{input}',
                         ])
                             ->input('text', ['class' => 'input textarea', 'placeholder' => "Мамедов Кумар", 'style' => 'width: 90%']);
                         ?>
                         <span>Введите ваше имя и фамилию</span><br><br>
 
-
-                        <?php echo $form->field($userRegistration, 'location_id', [
+                        <?= $form->field($userRegistration, 'location_id', [
                             'template' => '{label}{input}',
                         ])
                             ->dropDownList(Location::find()->select(['city', 'id'])->indexBy('id')->column(),
@@ -52,16 +48,14 @@ use frontend\models\Location;
                         ?>
                         <span>Укажите город, чтобы находить подходящие задачи</span><br><br>
 
-                        <?php echo $form->field($userRegistration, 'password', [
+                        <?= $form->field($userRegistration, 'password', [
                             'template' => '{label}{input}',
                         ])
                             ->passwordInput(['class' => 'input textarea', 'type' => 'password', 'style' => 'width: 90%'])
-
                         ?>
                         <span>Длина пароля от 8 символов</span>
 
-                        <button class="button button__registration" type="submit">Cоздать аккаунт</button>
-
+                        <?= Html::submitButton('Создать аккаунт', ['class' => 'button button__registration']); ?>
                     <?php ActiveForm::end(); ?>
                 </div>
             </section>

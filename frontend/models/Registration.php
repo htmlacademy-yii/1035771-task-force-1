@@ -32,7 +32,7 @@ class Registration extends ActiveRecord
             [['name', 'email', 'password', 'location_id'], 'safe'],
             [['name', 'email', 'password', 'location_id'], 'required'],
             ['email', 'email'],
-            ['email', 'unique'],
+            ['email', 'unique', 'message' => 'К сожалению, адрес электронной почты занят.'],
             ['password', 'string', 'min' => 8],
         ];
     }
