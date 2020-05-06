@@ -15,7 +15,7 @@ class RegistrationController extends Controller
 
         $userRegistration = new Registration();
         if (Yii::$app->request->getIsPost()) {
-            $userRegistration->load(Yii::$app->request->post());
+            $userRegistration->load($_POST);
 
             if (Yii::$app->request->isAjax) {
                 return ActiveForm::validate($userRegistration);

@@ -21,26 +21,24 @@ use frontend\models\Location;
                 <h1>Регистрация аккаунта</h1>
 
                 <div class="registration-wrapper">
-                    <?php $form=ActiveForm::begin(['id' => 'registration-form',  'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'registration__user-form form-create'], 'method' => 'post']); ?>
-                    <?=$form->errorSummary($userRegistration);?>
+                    <?php $form=ActiveForm::begin(['id' => 'registration-form', 'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'registration__user-form form-create'], 'method' => 'post']); ?>
 
                         <?= $form->field($userRegistration, 'email', [
-                            'template' => '{label}{input}',
+                            'template' => '{label}{input}{error}',
                         ])
                             ->input('text', ['class' => 'input textarea', 'type' => 'email','placeholder' => "kumarm@mail.ru", 'style' => 'width: 90%']);
-
                         ?>
                         <span>Введите валидный адрес электронной почты</span><br><br>
 
                         <?= $form->field($userRegistration, 'name', [
-                            'template' => '{label}{input}',
+                            'template' => '{label}{input}{error}',
                         ])
                             ->input('text', ['class' => 'input textarea', 'placeholder' => "Мамедов Кумар", 'style' => 'width: 90%']);
                         ?>
                         <span>Введите ваше имя и фамилию</span><br><br>
 
                         <?= $form->field($userRegistration, 'location_id', [
-                            'template' => '{label}{input}',
+                            'template' => '{label}{input}{error}',
                         ])
                             ->dropDownList(Location::find()->select(['city', 'id'])->indexBy('id')->column(),
                                 ['class' => 'multiple-select input town-select registration-town','style' => 'width: 100%',
@@ -49,7 +47,7 @@ use frontend\models\Location;
                         <span>Укажите город, чтобы находить подходящие задачи</span><br><br>
 
                         <?= $form->field($userRegistration, 'password', [
-                            'template' => '{label}{input}',
+                            'template' => '{label}{input}{error}',
                         ])
                             ->passwordInput(['class' => 'input textarea', 'type' => 'password', 'style' => 'width: 90%'])
                         ?>

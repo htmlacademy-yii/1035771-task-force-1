@@ -4,14 +4,9 @@
 namespace frontend\models;
 
 use yii\base\Model;
-use yii\db\ActiveRecord;
 
-class Registration extends ActiveRecord
+class Registration extends Model
 {
-    public static function tableName(){
-        return 'users';
-    }
-
     public $email;
     public $name;
     public $location_id;
@@ -32,7 +27,7 @@ class Registration extends ActiveRecord
             [['name', 'email', 'password', 'location_id'], 'safe'],
             [['name', 'email', 'password', 'location_id'], 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'message' => 'К сожалению, адрес электронной почты занят.'],
+            ['email', 'unique', 'targetClass' => '\frontend\models\User', 'message' => 'К сожалению, адрес электронной почты занят.'],
             ['password', 'string', 'min' => 8],
         ];
     }
