@@ -10,32 +10,30 @@ use yii\widgets\ActiveForm;
 
 class RegistrationController extends Controller
 {
+
     public function actionIndex()
     {
+        $user = new User();
 
-        $userRegistration = new Registration();
         if (Yii::$app->request->getIsPost()) {
-            $userRegistration->load($_POST);
+            $user->load($_POST) && $user->save();
 
             if (Yii::$app->request->isAjax) {
-                return ActiveForm::validate($userRegistration);
+                return ActiveForm::validate($user);
             }
 
-            if ($userRegistration->validate()) {
-                $user = new User();
-                $user->email = $userRegistration->email;
-                $user->name = $userRegistration->name;
-                $user->setPassword($userRegistration->password);
-                $user->location_id = $userRegistration->location_id;
+            if ($user->validate()) {
+                $user->email;
+                $user->name;
+                $user->location_id;
+                $user->setPassword($user->password);
 
-                if($user->save()) {
-                    return $this->goHome();
-                }
+                return $this->goHome();
             }
         }
 
         return $this->render('registration', [
-            'userRegistration' => $userRegistration
+            'userRegistration' => $user
         ]);
     }
 }
