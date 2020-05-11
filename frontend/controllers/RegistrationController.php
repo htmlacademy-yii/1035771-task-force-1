@@ -16,7 +16,7 @@ class RegistrationController extends Controller
         $user = new User();
 
         if (Yii::$app->request->getIsPost()) {
-            $user->load($_POST) && $user->save();
+            $user->load($_POST);
 
             if (Yii::$app->request->isAjax) {
                 return ActiveForm::validate($user);
@@ -28,7 +28,11 @@ class RegistrationController extends Controller
                 $user->location_id;
                 $user->setPassword($user->password);
 
-                return $this->goHome();
+                if ($user->save()) {
+                    return $this->goHome();
+                }
+
+
             }
         }
 
