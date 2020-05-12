@@ -211,9 +211,14 @@ class User extends \yii\db\ActiveRecord
     return $user->all();
     }
 
-    public function setPassword($password)
+    public function beforeSave($insert)
     {
-        $this->password = Yii::$app->security->generatePasswordHash($password);
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        $this->password = Yii::$app->security->generatePasswordHash($insert);
+        return true;
     }
 
 }
