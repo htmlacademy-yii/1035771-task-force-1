@@ -47,12 +47,15 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'email', 'password', 'location_id'], 'required'],
+            [['name', 'email', 'password', 'location_id'], 'safe'],
             [['creation_time', 'birthday', 'last_active_time'], 'safe'],
             [['info'], 'string'],
             [['views', 'location_id', 'notification_new_message', 'notification_task_action', 'notification_review', 'show_for_customers'], 'integer'],
             [['name', 'email', 'password', 'phone', 'skype', 'other_contact'], 'string', 'max' => 128],
             [['avatar'], 'string', 'max' => 500],
-            [['email'], 'unique'],
+            [['email'], 'unique', 'message' => 'К сожалению, адрес электронной почты занят.'],
+            ['email', 'email'],
+            ['password', 'string', 'min' => 8],
         ];
     }
 
@@ -63,9 +66,9 @@ class User extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'email' => 'Email',
-            'password' => 'Password',
+            'name' => 'Ваше имя',
+            'email' => 'Электронная почта',
+            'password' => 'Пароль',
             'creation_time' => 'Creation Time',
             'birthday' => 'Birthday',
             'info' => 'Info',
@@ -74,7 +77,7 @@ class User extends \yii\db\ActiveRecord
             'skype' => 'Skype',
             'other_contact' => 'Other Contact',
             'views' => 'Views',
-            'location_id' => 'Location ID',
+            'location_id' => 'Город проживания',
             'notification_new_message' => 'Notification New Message',
             'notification_task_action' => 'Notification Task Action',
             'notification_review' => 'Notification Review',
@@ -207,4 +210,15 @@ class User extends \yii\db\ActiveRecord
 
     return $user->all();
     }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+
+        $this->password = Yii::$app->security->generatePasswordHash($insert);
+        return true;
+    }
+
 }
