@@ -12,6 +12,7 @@ class RegistrationController extends Controller
 
     public function actionIndex()
     {
+        //$this->layout = '@app/views/landing/landing.php';
         $user = new User();
 
         if (Yii::$app->request->getIsPost()) {

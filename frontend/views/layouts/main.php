@@ -27,6 +27,7 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="table-layout">
+    <?php if (!in_array(Yii::$app->controller->id, ['landing'])): ?>
     <header class="page-header">
         <div class="main-container page-header__container">
             <div class="page-header__logo">
@@ -57,7 +58,7 @@ AppAsset::register($this);
                     </svg>
                 </a>
             </div>
-            <?php if (!in_array(Yii::$app->controller->id, ['registration'])): ?>
+            <?php if (!in_array(Yii::$app->controller->id, ['registration', 'login', 'landing'])): ?>
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
                     <li class="site-list__item">
@@ -106,7 +107,8 @@ AppAsset::register($this);
                          alt="Аватар пользователя">
                 </a>
                 <span class="header__account-name">
-                 Василий
+                    Василий
+                    <?= Yii::$app->user->getIdentity()->name ?>
              </span>
             </div>
             <div class="account__pop-up">
@@ -122,10 +124,10 @@ AppAsset::register($this);
                     </li>
                 </ul>
             </div>
-            <?php endif;?>
         </div>
+        <?php endif;?>
     </header>
-
+    <?php endif;?>
     <main class="page-main">
 
         <div class="main-container page-container">
