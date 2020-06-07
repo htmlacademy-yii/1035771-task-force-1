@@ -31,6 +31,7 @@ use yii\web\IdentityInterface;
  * @property Proposals[] $proposals
  * @property Tasks[] $tasks
  * @property Tasks[] $tasks0
+ * @method hashPassword(string $password)
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -58,6 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email'], 'unique', 'message' => 'К сожалению, адрес электронной почты занят.'],
             ['email', 'email'],
             ['password', 'string', 'min' => 8],
+
         ];
     }
 
@@ -219,8 +221,8 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-        $this->password = Yii::$app->security->generatePasswordHash($insert);
-        return true;
+       $this->password = Yii::$app->security->generatePasswordHash($insert);
+            return true;
     }
 
     public static function findByEmail($email)
@@ -252,9 +254,13 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // TODO: Implement validateAuthKey() method.
     }
-
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);
     }
+
 }

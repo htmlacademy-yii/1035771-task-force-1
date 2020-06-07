@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\LoginForm;
 use frontend\models\UserCategory;
 use Yii;
 use frontend\models\User;
@@ -37,7 +38,6 @@ class UserController extends Controller
 
     public function actionLogout() {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 

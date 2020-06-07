@@ -7,11 +7,11 @@ use frontend\models\LoginForm;
 use Yii;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
-use yii\web\Response;
 use frontend\models\User;
 
 class LoginController extends Controller
 {
+
     public function actionIndex()
     {
 

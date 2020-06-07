@@ -12,9 +12,12 @@ use common\widgets\Alert;
 
 AppAsset::register($this);
 ?>
+
 <?php $this->beginPage() ?>
+
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
+
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <?php $this->registerCsrfMetaTags() ?>
@@ -27,9 +30,10 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="table-layout">
-    <?php if (!in_array(Yii::$app->controller->id, ['landing'])): ?>
+
     <header class="page-header">
         <div class="main-container page-header__container">
+            <?php if (!in_array(Yii::$app->controller->id, ['landing'])): ?>
             <div class="page-header__logo">
                 <a href="/">
                     <svg class="page-header__logo-image" id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1634 646.35">
@@ -58,6 +62,7 @@ AppAsset::register($this);
                     </svg>
                 </a>
             </div>
+            <?php endif;?>
             <?php if (!in_array(Yii::$app->controller->id, ['registration', 'login', 'landing'])): ?>
             <div class="header__nav">
                 <ul class="header-nav__list site-list">
@@ -107,7 +112,6 @@ AppAsset::register($this);
                          alt="Аватар пользователя">
                 </a>
                 <span class="header__account-name">
-                    Василий
                     <?= Yii::$app->user->getIdentity()->name ?>
              </span>
             </div>
@@ -120,14 +124,14 @@ AppAsset::register($this);
                         <a href="#">Настройки</a>
                     </li>
                     <li>
-                        <a href="#">Выход</a>
+                        <?= Html::a('Выход', '/user/logout')  ?>
                     </li>
                 </ul>
             </div>
         </div>
         <?php endif;?>
     </header>
-    <?php endif;?>
+
     <main class="page-main">
 
         <div class="main-container page-container">
@@ -139,6 +143,7 @@ AppAsset::register($this);
         </div>
 
     </main>
+
     <?php if (!in_array(Yii::$app->controller->id, ['registration'])): ?>
     <footer class="page-footer">
         <div class="main-container page-footer__container">

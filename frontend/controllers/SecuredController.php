@@ -18,17 +18,7 @@ class SecuredController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
                         'roles' => ['@']
-                    ],
-
-                    [
-                        'actions' => ['login', 'registration', 'landing'],
-                        'allow' => false,
-                        'roles' => ['@'],
-                        'denyCallback' => function ($rule, $action) {
-                        return $action->controller->redirect('/');
-                        }
                     ],
 
                     [
