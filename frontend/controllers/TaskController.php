@@ -10,7 +10,7 @@ use frontend\models\TaskFilterForm;
 use yii\web\NotFoundHttpException;
 
 
-class TaskController extends Controller
+class TaskController extends SecuredController
 {
     public function actionIndex()
     {

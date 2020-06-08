@@ -2,15 +2,13 @@
 
 namespace frontend\controllers;
 
-use frontend\models\LoginForm;
-use frontend\models\UserCategory;
 use Yii;
 use frontend\models\User;
 use frontend\models\UserFilterForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class UserController extends Controller
+class UserController extends SecuredController
 {
     public function actionIndex()
     {

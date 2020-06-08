@@ -221,7 +221,7 @@ class User extends ActiveRecord implements IdentityInterface
             return false;
         }
 
-       $this->password = Yii::$app->security->generatePasswordHash($insert);
+       $this->password = Yii::$app->security->generatePasswordHash($this->password);
             return true;
     }
 
@@ -254,10 +254,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         // TODO: Implement validateAuthKey() method.
     }
-    public function setPassword($password)
-    {
-        $this->password = Yii::$app->security->generatePasswordHash($password);
-    }
+
     public function validatePassword($password)
     {
         return Yii::$app->security->validatePassword($password, $this->password);

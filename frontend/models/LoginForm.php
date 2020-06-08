@@ -7,9 +7,6 @@ use yii\base\Model;
 use Yii;
 use yii\db\ActiveRecord;
 
-/**
- * @method hashPassword($password)
- */
 class LoginForm extends Model
 {
     public $email;
@@ -28,12 +25,9 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-
             [['email', 'password'], 'required'],
             ['password', 'string', 'min' => 8],
-
-            ['password', 'uniqueByType'],
-
+            ['password', 'validatePassword'],
         ];
     }
 
@@ -57,12 +51,4 @@ class LoginForm extends Model
         return $this->_user;
     }
 
-    public function uniqueByType($attribute, $params) {
-         if ($this->password) {
-             $existModel = Type::find()->byType($this->password)->byEmail($this->$attribute)->one();
-             if ($existModel) {
-                 $this->addError($attribute, 'Serial number must be unique for type.');
-             }
-         }
-     }
 }

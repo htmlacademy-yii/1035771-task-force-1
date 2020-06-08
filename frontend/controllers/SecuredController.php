@@ -11,6 +11,7 @@ class SecuredController extends Controller
 {
     public function behaviors()
     {
+
         return [
             'access' => [
                 'class' => AccessControl::class,
@@ -31,5 +32,4 @@ class SecuredController extends Controller
             ]
         ];
     }
-
 }

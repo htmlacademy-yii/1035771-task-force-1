@@ -282,9 +282,8 @@ AppAsset::register($this);
         ])
             ->textinput([
                 'class' => 'enter-form-email input input-middle',
-                'style' => 'width: 90%; margin-bottom:5px',
-            ])
-            ->error(['tag' => 'span', 'style' => 'display:inline-block; margin-bottom:12px']) ?>
+
+            ])?>
 
         <?= $form->field($loginForm, 'password', [
             'options' => ['class' => ''],
