@@ -2,14 +2,13 @@
 
 namespace frontend\controllers;
 
-use frontend\models\UserCategory;
 use Yii;
 use frontend\models\User;
 use frontend\models\UserFilterForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class UserController extends Controller
+class UserController extends SecuredController
 {
     public function actionIndex()
     {
@@ -33,6 +32,20 @@ class UserController extends Controller
         }
 
         return $this->render('view', ['user'=>$user]);
+    }
+
+    public function actionLogout() {
+        Yii::$app->user->logout();
+        return $this->goHome();
+    }
+
+    public function actionProfile()
+    {
+        if ($id = Yii::$app->user->getId()) {
+            $user = User::findOne($id);
+
+            print($user->email);
+        }
     }
 
 }

@@ -1,13 +1,3 @@
-<?php
-use yii\helpers\Url;
-use yii\helpers\Html;
-use frontend\assets\AppAsset;
-use yii\widgets\ActiveForm;
-
-AppAsset::register($this);
-?>
-
-<?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -50,7 +40,7 @@ AppAsset::register($this);
                 <p>Работа там, где ты!</p>
             </div>
             <div class="header__account--index">
-                <a href="#" class="header__account-enter open-modal" data-for="enter-form">
+                <a href="/login/" class="header__account-enter open-modal" data-for="enter-form">
                     <span>Вход</span></a>
                 или
                 <a href="/registration/" class="header__account-registration">
@@ -266,51 +256,21 @@ AppAsset::register($this);
     </footer>
     <section class="modal enter-form form-modal" id="enter-form">
         <h2>Вход на сайт</h2>
-        <?php $form = ActiveForm::begin([
-            'id' => 'user-login-form',
-            'action' => ['/landing'],
-            'method' => 'post',
-            'enableAjaxValidation' => true
-        ]) ?>
-
-        <?= $form->field($loginForm, 'email', [
-            'options' => ['class' => ''],
-            'labelOptions' => [
-                'class' => 'form-modal-description form-control',
-                'style' => 'display:inline-block'
-            ]
-        ])
-            ->textinput([
-                'class' => 'enter-form-email input input-middle',
-
-            ])?>
-
-        <?= $form->field($loginForm, 'password', [
-            'options' => ['class' => ''],
-            'labelOptions' => [
-                'class' => 'form-modal-description form-control',
-                'style' => 'display:inline-block'
-            ]
-
-        ])
-            ->passwordInput([
-                'class' => 'enter-form-email input input-middle',
-                'style' => 'width: 90%; margin-bottom:10px; border-color: #e4e9f2',
-                'type' => 'password'
-            ])
-            ->error(['tag' => 'span', 'style' => 'display:inline-block; margin-bottom:12px']) ?>
-
-
-        <div class="form-group">
-            <?= Html::submitButton('Войти',
-                ['class' => 'button', 'name' => 'login-button']) ?>
-        </div>
-
-        <?php ActiveForm::end(); ?>
+        <form action="#" method="post">
+            <p>
+                <label class="form-modal-description" for="enter-email">Email</label>
+                <input class="enter-form-email input input-middle" type="email" name="enter-email" id="enter-email">
+            </p>
+            <p>
+                <label class="form-modal-description" for="enter-password">Пароль</label>
+                <input class="enter-form-email input input-middle" type="password" name="enter-email" id="enter-password">
+            </p>
+            <button class="button" type="submit">Войти</button>
+        </form>
         <button class="form-modal-close" type="button">Закрыть</button>
     </section>
 </div>
 <div class="overlay"></div>
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>
