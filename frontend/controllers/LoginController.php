@@ -1,13 +1,11 @@
 <?php
 
-
 namespace frontend\controllers;
 
 use frontend\models\LoginForm;
 use Yii;
 use yii\web\Controller;
-use yii\widgets\ActiveForm;
-use frontend\models\User;
+
 
 class LoginController extends Controller
 {
@@ -28,6 +26,4 @@ class LoginController extends Controller
             'loginForm' => $loginForm,
         ]);
     }
-
-
 }
