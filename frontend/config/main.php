@@ -46,6 +46,7 @@ return [
                 '/' => '/task',
                 'task/view/<id:\d+>' => 'task/view',
                 'user/view/<id:\d+>' => 'user/view',
+                'task/create' => 'create',
             ],
         ],
 
