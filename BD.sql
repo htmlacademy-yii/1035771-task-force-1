@@ -40,7 +40,7 @@ CREATE TABLE tasks (
     title VARCHAR(255) NOT NULL,
     description VARCHAR (500) NOT NULL,
     creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status TINYINT NOT NULL DEFAULT 1,
+    status TINYINT NULL DEFAULT 0,
     url_file VARCHAR(500) NULL,
     deadline DATETIME,
     budget INT NULL,

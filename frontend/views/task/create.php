@@ -20,13 +20,13 @@ use frontend\models\Category;
             <section class="create__task">
                 <h1>Публикация нового задания</h1>
                 <div class="create__task-main">
-                    <?php $form=ActiveForm::begin(['id' => 'task-form', 'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'create__task-form form-create'], 'method' => 'post']); ?>
+                    <?php $form=ActiveForm::begin(['id' => 'task-form', 'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'create__task-form form-create', 'enctype' => 'multipart/form-data'], 'method' => 'post']); ?>
 
                     <form class="create__task-form form-create" action="/" enctype="multipart/form-data" id="task-form">
 
                         <label for="10">Мне нужно</label>
                         <?= $form->field($task, 'title', [
-                            'template' => '{input}{error}',
+                            'template' => '{input}',
                         ])
                             ->input('text', ['class' => 'input textarea', 'placeholder' => "Повесить полку", 'style' => 'width: 94%']);
                         ?>
@@ -34,7 +34,7 @@ use frontend\models\Category;
 
                         <label for="11">Подробности задания</label>
                         <?= $form->field($task, 'description', [
-                            'template' => '{input}{error}',
+                            'template' => '{input}',
                         ])
                             ->textarea(['class' => 'input textarea', 'placeholder' => "Place your text", 'style' => 'width: 94%', 'rows'=>'7']);
                         ?>
@@ -42,7 +42,7 @@ use frontend\models\Category;
 
                         <label for="12">Категория</label>
                         <?= $form->field($task, 'category_id', [
-                            'template' => '{input}{error}',
+                            'template' => '{input}',
                         ])
                             ->dropDownList(Category::find()->select(['title', 'id'])->indexBy('id')->column(),
                                 ['class' => 'multiple-select input multiple-select-big','style' => 'width: 100%',
@@ -53,13 +53,12 @@ use frontend\models\Category;
                         <label>Файлы</label>
                         <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
                         <?= $form->field($task, 'url_file[]', [
-                            'template' => '{input}{error}',
+                            'template' => '{input}',
                         ])
                             ->fileInput(['multiple' => true, 'class' => 'create__file', 'placeholder' => "Добавить новый файл", 'style' => 'width: 100%']);
                         ?>
 
                             <!--                          <input type="file" name="files[]" class="dropzone">-->
-
 
                         <label for="13">Локация</label>
                         <input class="input-navigation input-middle input" id="13" type="search" name="q" placeholder="Санкт-Петербург, Калининский район">
@@ -69,7 +68,7 @@ use frontend\models\Category;
                             <div class="create__price-time--wrapper">
                                 <label for="14">Бюджет</label>
                                 <?= $form->field($task, 'budget', [
-                                    'template' => '{input}{error}',
+                                    'template' => '{input}',
                                 ])
                                     ->textarea(['class' => 'input textarea input-money', 'placeholder' => "1000", 'style' => 'width: 86%', 'rows'=>'1']);
                                 ?>
@@ -78,7 +77,7 @@ use frontend\models\Category;
                             <div class="create__price-time--wrapper">
                                 <label for="15">Срок исполнения</label>
                                 <?= $form->field($task, 'deadline', [
-                                    'template' => '{input}{error}',
+                                    'template' => '{input}',
                                 ])
                                     ->input('date', ['class' => 'input-middle input input-date', 'placeholder' => "10.11, 15:00", 'style' => 'width: 86%', 'rows'=>'1']);
                                 ?>
@@ -105,8 +104,11 @@ use frontend\models\Category;
                             <h2>Ошибки заполнения формы</h2>
                             <?php foreach ($errors as $name => $error):?>
                             <h3><?= $task->attributeLabels()[$name] ?></h3>
-                            <p>Это поле должно быть выбрано.<br>
-                                Задание должно принадлежать одной из категорий</p>
+                            <p>
+                                <?php foreach ($error as $description): ?>
+                                    <?= $description ?> <br>
+                                <?php endforeach; ?>
+                            </p>
                             <?php endforeach;?>
 
                         </div>

@@ -41,6 +41,8 @@ class TaskController extends SecuredController
 
         $task = new TaskCreate();
 
+        $task->customer_id = Yii::$app->user->id;
+
         if (Yii::$app->request->getIsPost()) {
             $task->load($_POST);
 
@@ -50,7 +52,8 @@ class TaskController extends SecuredController
 
             if ($task->validate()) {
 
-                if ($task->save()) {
+                if ($task->create($task)) {
+
                     return $this->goHome();
                 }
             } else {
