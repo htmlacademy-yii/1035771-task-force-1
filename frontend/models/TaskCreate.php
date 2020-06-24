@@ -8,10 +8,13 @@ use yii\base\Model;
 use frontend\models\User;
 use Yii;
 use frontend\models\Task;
+use frontend\models\File;
 use yii\web\Controller;
+use frontend\models\TaskFile;
 use frontend\models\TaskFilterForm;
 use yii\web\NotFoundHttpException;
 use yii\widgets\ActiveForm;
+use yii\web\UploadedFile;
 
 class TaskCreate extends Model
 {
@@ -50,10 +53,10 @@ class TaskCreate extends Model
     {
         return [
             [['title', 'description', 'customer_id'], 'required'],
-            [['creation_time', 'deadline'], 'safe'],
+            [['creation_time', 'deadline', 'url_file'], 'safe'],
             [['status', 'customer_id', 'executor_id', 'category_id', 'location_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
-            [['description', 'url_file'], 'string', 'max' => 500],
+            [['description'], 'string', 'max' => 500],
             [['category_id'], 'required', 'message' => 'Это поле должно быть выбрано.<br>Задание должно принадлежать одной из категорий'],
             [['budget'], 'integer', 'min' => '1'],
             [['deadline'], 'date', 'format' => 'Y-m-d', 'min' => date('Y-m-d')],
@@ -61,9 +64,8 @@ class TaskCreate extends Model
         ];
     }
 
-    public function create($model): ?string
+    public function create($model): ?Task
     {
-        $transaction = Yii::$app->db->beginTransaction();
 
         $task = new Task();
         $task->title = $model->title;
@@ -72,31 +74,23 @@ class TaskCreate extends Model
         $task->budget = $model->budget;
         $task->deadline = $model->deadline;
         $task->customer_id = Yii::$app->user->getIdentity()->id;
+        $task->url_file = $model->upload();
 
         if (!$task->save()) {
-            $transaction->rollBack();
             return null;
         }
 
-        if (!$this->upload($model, $task->id)) {
-            $transaction->rollBack();
-            return null;
-        }
-
-        $transaction->commit();
-        return "/task/view/$this->id";
+        return $task;
     }
 
-    public function upload($model, $task_id)
+    public function upload()
     {
+
         if ($this->validate()) {
-            foreach ($this->url_file as $file) {
-                $file->saveAs('filesUpload/' . $file->getName());
-               
-
-            }
-
+            $this->url_file->saveAs('upload/' . $this->url_file->baseName . '.' . $this->url_file->extension);
+            return true;
+        } else {
+            return false;
         }
-        return true;
     }
 }

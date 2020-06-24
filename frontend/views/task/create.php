@@ -20,7 +20,7 @@ use frontend\models\Category;
             <section class="create__task">
                 <h1>Публикация нового задания</h1>
                 <div class="create__task-main">
-                    <?php $form=ActiveForm::begin(['id' => 'task-form', 'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'create__task-form form-create', 'enctype' => 'multipart/form-data'], 'method' => 'post']); ?>
+                    <?php $form=ActiveForm::begin(['id' => 'task-form', 'enableClientValidation' => true, 'enableAjaxValidation' => true, 'options' => ['class' => 'create__task-form form-create', ['enctype' => 'multipart/form-data']]]); ?>
 
                     <form class="create__task-form form-create" action="/" enctype="multipart/form-data" id="task-form">
 

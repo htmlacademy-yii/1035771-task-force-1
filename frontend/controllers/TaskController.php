@@ -4,13 +4,16 @@ namespace frontend\controllers;
 
 use frontend\models\TaskCreate;
 use frontend\models\User;
+use frontend\models\UserCategory;
 use Yii;
 use frontend\models\Task;
+use frontend\models\File;
+use frontend\models\TaskFile;
 use yii\web\Controller;
 use frontend\models\TaskFilterForm;
 use yii\web\NotFoundHttpException;
 use yii\widgets\ActiveForm;
-
+use yii\web\UploadedFile;
 
 class TaskController extends SecuredController
 {
@@ -49,6 +52,8 @@ class TaskController extends SecuredController
             if (Yii::$app->request->isAjax) {
                 return ActiveForm::validate($task);
             }
+
+            $task->url_file = UploadedFile::getInstance($task, 'url_file');
 
             if ($task->validate()) {
 

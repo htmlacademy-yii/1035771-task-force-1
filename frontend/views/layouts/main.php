@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;
+use frontend\models\UserCategory;
 
 AppAsset::register($this);
 ?>
@@ -71,9 +72,11 @@ AppAsset::register($this);
                     <li class="site-list__item">
                         <a href="/user/">Исполнители</a>
                     </li>
+
                     <li class="site-list__item">
                         <a href="/task/create/">Создать задание</a>
                     </li>
+
                     <li class="site-list__item site-list__item--active">
                         <a>Мой профиль</a>
                     </li>

@@ -5,6 +5,7 @@ namespace frontend\models;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use frontend\models\Category;
 
 /**
  * This is the model class for table "users".
@@ -181,6 +182,8 @@ class User extends ActiveRecord implements IdentityInterface
     public function findByFilterForm($formUser) {
 
         $user = User::find()
+            ->joinWith('categories')
+            ->andWhere(UserCategory::tableName().'.user_id')
             ->orderBy('users.creation_time DESC');
 
         foreach ($formUser as $key => $value) {
