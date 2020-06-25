@@ -53,8 +53,6 @@ class TaskController extends SecuredController
                 return ActiveForm::validate($task);
             }
 
-            $task->url_file = UploadedFile::getInstance($task, 'url_file');
-
             if ($task->validate()) {
 
                 if ($task->create($task)) {
