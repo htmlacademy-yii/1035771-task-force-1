@@ -52,7 +52,7 @@ use frontend\models\Category;
 
                         <label>Файлы</label>
                         <span>Загрузите файлы, которые помогут исполнителю лучше выполнить или оценить работу</span>
-                        <?= $form->field($task, 'url_file[]', [
+                        <?= $form->field($task, 'url_file', [
                             'template' => '{input}',
                         ])
                             ->fileInput(['multiple' => true, 'class' => 'create__file', 'placeholder' => "Добавить новый файл", 'style' => 'width: 100%']);

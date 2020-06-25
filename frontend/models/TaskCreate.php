@@ -76,9 +76,9 @@ class TaskCreate extends Model
         $task->customer_id = Yii::$app->user->getIdentity()->id;
         $task->url_file = $model->upload();
 
-        $task->save(false);
+        $task->save();
 
-        if (!$task->save(false)) {
+        if (!$task->save()) {
             return null;
         }
 
@@ -89,9 +89,12 @@ class TaskCreate extends Model
     {
         if (UploadedFile::getInstance($this, 'url_file')) {
             $this->url_file = UploadedFile::getInstance($this, 'url_file');
-            $this->url_file->saveAs('uploads/' . $this->url_file->baseName . '.' . $this->url_file->extension);
 
-            return 'upload/' . $this->url_file->baseName . '.' . $this->url_file->extension;
+            $dir = Yii::getAlias('@frontend/web/upload/');
+            $this->url_file->saveAs($dir . $this->url_file->baseName . '.' . $this->url_file->extension);
+
+            return $dir . $this->url_file->baseName . '.' . $this->url_file->extension;
+
         } else {
             return '';
         }

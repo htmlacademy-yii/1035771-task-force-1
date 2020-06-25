@@ -49,10 +49,6 @@ class TaskController extends SecuredController
         if (Yii::$app->request->getIsPost()) {
             $task->load($_POST);
 
-            if (Yii::$app->request->isAjax) {
-                return ActiveForm::validate($task);
-            }
-
             if ($task->validate()) {
 
                 if ($task->create($task)) {
