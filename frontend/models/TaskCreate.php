@@ -68,6 +68,7 @@ class TaskCreate extends Model
     {
 
         $task = new Task();
+        $task->id = $model->id;
         $task->title = $model->title;
         $task->description = $model->description;
         $task->category_id = $model->category_id;
@@ -98,5 +99,6 @@ class TaskCreate extends Model
         } else {
             return '';
         }
+
     }
 }
