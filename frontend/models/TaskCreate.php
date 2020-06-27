@@ -53,14 +53,14 @@ class TaskCreate extends Model
     {
         return [
             [['title', 'description', 'customer_id'], 'required'],
-            [['creation_time', 'deadline', 'url_file'], 'safe'],
+            [['creation_time', 'deadline', 'url_file', 'budget'], 'safe'],
             [['status', 'customer_id', 'executor_id', 'category_id', 'location_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 500],
             [['category_id'], 'required', 'message' => 'Это поле должно быть выбрано.<br>Задание должно принадлежать одной из категорий'],
-            [['budget'], 'integer', 'min' => '1'],
-            [['deadline'], 'date', 'format' => 'Y-m-d', 'min' => date('Y-m-d')],
-            [['url_file'], 'file', 'skipOnEmpty' => true],
+            ['budget', 'integer', 'min' => '1'],
+            ['deadline', 'date', 'format' => 'php:Y-m-d', 'min' => date('Y-m-d')],
+            ['url_file', 'file', 'skipOnEmpty' => true],
         ];
     }
 
