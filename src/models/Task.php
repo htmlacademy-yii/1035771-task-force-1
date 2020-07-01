@@ -10,7 +10,7 @@ use app\models\actions\ProposeAction;
 use app\models\actions\RefuseAction;
 use app\models\actions\StartAction;
 
-class Task extends \yii\base\Model
+class Task
 {
     const STATUS_NEW = 'new';
     const STATUS_PROCESS = 'process';
