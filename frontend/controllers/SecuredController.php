@@ -24,7 +24,7 @@ class SecuredController extends Controller
                     ],
 
                     [
-                        'actions' => ['task/create'],
+                        'actions' => ['create'],
                         'allow' => true,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
@@ -33,7 +33,7 @@ class SecuredController extends Controller
                             $user = User::find()->where(['id' => $id == Yii::$app->user->getId()])->one();
                             $user_category = UserCategory::find()->where(['user_id' => $id ==Yii::$app->user->getId()])->one();
 
-                            return $user === $user_category;
+                            return $user !== $user_category;
                         }
 
                     ],

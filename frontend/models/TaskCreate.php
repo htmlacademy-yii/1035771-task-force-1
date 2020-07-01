@@ -60,7 +60,7 @@ class TaskCreate extends Model
             [['category_id'], 'required', 'message' => 'Это поле должно быть выбрано.<br>Задание должно принадлежать одной из категорий'],
             ['budget', 'integer', 'min' => '1'],
             ['deadline', 'date', 'format' => 'php:Y-m-d', 'min' => date('Y-m-d')],
-            ['url_file', 'file', 'skipOnEmpty' => true],
+            [['url_file'], 'file', 'skipOnEmpty' => true, 'maxFiles' => 10],
         ];
     }
 
@@ -88,17 +88,16 @@ class TaskCreate extends Model
 
     public function upload()
     {
-        if (UploadedFile::getInstance($this, 'url_file')) {
-            $this->url_file = UploadedFile::getInstance($this, 'url_file');
+        if (UploadedFile::getInstances($this, 'url_file')) {
+            $this->url_file = UploadedFile::getInstances($this, 'url_file');
 
             $dir = Yii::getAlias('@frontend/web/upload/');
-            $this->url_file->saveAs($dir . $this->url_file->baseName . '.' . $this->url_file->extension);
+            foreach ($this->url_file as $item) {
+                $item->saveAs($dir . $item->baseName . '.' . $item->extension . ';');
+                return $item->baseName . '.' . $item->extension . ';';
+            }
 
-            return $dir . $this->url_file->baseName . '.' . $this->url_file->extension;
-
-        } else {
-            return '';
         }
-
+        return true;
     }
 }
