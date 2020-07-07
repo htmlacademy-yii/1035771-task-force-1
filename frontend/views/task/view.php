@@ -36,11 +36,11 @@
                             <h3 class="content-view__h3">Вложения</h3>
                             <?=$files = trim($task['url_file']);
                             $files = substr($files, 0, -1);
-                            $attachments=explode(',', $files);?>
-                            <?php foreach ($attachments as $attachment): ?>
-                            <a href="<?=$attachment->url_file ?>" download><?=$attachment->url_file;?></a>
+                            $attachments=explode(',', $files);
+                             foreach ($attachments as $attachment): ?>
+                            <a href="/upload/<?=$attachment->url_file ?>"><?=$attachment->url_file;?></a>
                             <?php endforeach?>
-                            
+
                         </div>
                         <div class="content-view__location">
                             <h3 class="content-view__h3">Расположение</h3>

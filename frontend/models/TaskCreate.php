@@ -92,15 +92,9 @@ class TaskCreate extends Model
             $this->url_file = UploadedFile::getInstances($this, 'url_file');
 
             $dir = Yii::getAlias('@frontend/web/upload/');
+
             foreach ($this->url_file as $item) {
-                $path = $dir . $item->baseName . '.' . $item->extension;
-                $count = 0;
-                {
-                    while(file_exists($path)) {
-                        $path = $dir . $item->baseName . '.' . $item->extension;
-                        $count++;
-                    }
-                }
+
                 $item->saveAs($dir . $item->baseName . '.' . $item->extension);
                 $files[] = $item->baseName . '.' . $item->extension;
 
