@@ -29,11 +29,7 @@ class SecuredController extends Controller
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
 
-                            $id = Yii::$app->request->get('id');
-                            $user = User::find()->where(['id' => $id == Yii::$app->user->getId()])->one();
-                            $user_category = UserCategory::find()->where(['user_id' => $id ==Yii::$app->user->getId()])->one();
-
-                            return $user !== $user_category;
+                            return User::findOne(Yii::$app->user->getId())->getRole();
                         }
 
                     ],

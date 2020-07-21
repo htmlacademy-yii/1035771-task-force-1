@@ -263,4 +263,17 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
+    public function getRole () {
+
+        $id = Yii::$app->request->get('id');
+        $count = UserCategory::find()
+            ->where(['user_id' => $id])
+            ->count();
+
+        if ($count === 0) {
+            return true;     //заказчик
+        } else {
+            return false;    //исполнитель
+        }
+    }
 }

@@ -1,3 +1,10 @@
+<?php use frontend\models\UserCategory;
+$id = Yii::$app->request->get('id');
+$count = UserCategory::find()
+    ->where(['user_id' => $id])
+    ->count();
+var_dump($count)?>
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>

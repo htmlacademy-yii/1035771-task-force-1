@@ -38,7 +38,7 @@
                             $files = substr($files, 0, -1);
                             $attachments=explode(',', $files);
                              foreach ($attachments as $attachment): ?>
-                            <a href="/upload/<?=$attachment->url_file ?>"><?=$attachment->url_file;?></a>
+                            <a href="<?= '/upload/' . $attachment->url_file ?>"><?=$attachment->url_file;?></a>
                             <?php endforeach?>
 
                         </div>
