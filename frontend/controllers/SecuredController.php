@@ -17,21 +17,22 @@ class SecuredController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
+               // 'only' => ['login', 'registration', 'landing', 'create', 'task', 'user'],
                 'rules' => [
                     [
+
                         'allow' => true,
-                        'roles' => ['@']
+                        'roles' => ['@'],
+
                     ],
 
                     [
                         'actions' => ['create'],
-                        'allow' => true,
+                        'allow' => false,
                         'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-
-                            return User::findOne(Yii::$app->user->getId())->getRole();
+                            return (new User)->getRole(Yii::$app->request->get('id'));
                         }
-
                     ],
 
                     [
