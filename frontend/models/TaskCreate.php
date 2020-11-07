@@ -99,8 +99,8 @@ class TaskCreate extends Model
                 $files[] = $item->baseName . '.' . $item->extension;
 
             }
-
+            return $this->url_file = implode(',', $files);
         }
-        return $this->url_file = implode(',', $files);
+
     }
 }

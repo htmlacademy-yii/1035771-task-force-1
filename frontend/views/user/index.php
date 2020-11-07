@@ -1,6 +1,8 @@
 <?php
+
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
+
 ?>
 
 <!DOCTYPE html>

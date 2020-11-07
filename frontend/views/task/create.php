@@ -3,6 +3,7 @@
 use frontend\models\TaskCreate;
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
+use frontend\models\User;
 ?>
 
 <!DOCTYPE html>
@@ -85,6 +86,7 @@ use frontend\models\Category;
                             </div>
                         </div>
                     </form>
+
                     <?php ActiveForm::end(); ?>
                     <div class="create__warnings">
                         <div class="warning-item warning-item--advice">

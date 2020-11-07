@@ -32,7 +32,7 @@
                             </p>
                         </div>
                         <div class="content-view__attach">
-
+                        <?php if (isset($task['url_file'])) :?>
                             <h3 class="content-view__h3">Вложения</h3>
                             <?=$files = trim($task['url_file']);
                             $files = substr($files, 0, -1);
@@ -40,7 +40,7 @@
                              foreach ($attachments as $attachment): ?>
                             <a href="<?= '/upload/' . $attachment->url_file ?>"><?=$attachment->url_file;?></a>
                             <?php endforeach?>
-
+                        <?php endif;?>
                         </div>
                         <div class="content-view__location">
                             <h3 class="content-view__h3">Расположение</h3>

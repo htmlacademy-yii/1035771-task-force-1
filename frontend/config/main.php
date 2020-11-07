@@ -49,7 +49,6 @@ return [
                 'task/create' => 'create',
             ],
         ],
-
     ],
     'params' => $params,
 ];

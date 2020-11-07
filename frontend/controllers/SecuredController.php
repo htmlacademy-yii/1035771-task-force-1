@@ -7,6 +7,7 @@ use frontend\models\User;
 use frontend\models\UserCategory;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class SecuredController extends Controller
@@ -17,22 +18,19 @@ class SecuredController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-               // 'only' => ['login', 'registration', 'landing', 'create', 'task', 'user'],
+                //'only' => ['login', 'registration', 'landing', 'logout', 'index', 'view', 'create'],
                 'rules' => [
                     [
-
+                        'actions' => ['index', 'view', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
 
                     ],
 
                     [
+                        'allow' => true,
                         'actions' => ['create'],
-                        'allow' => false,
-                        'roles' => ['@'],
-                        'matchCallback' => function ($rule, $action) {
-                            return (new User)->getRole(Yii::$app->request->get('id'));
-                        }
+                        'roles' => ['createTask'],
                     ],
 
                     [
@@ -42,8 +40,26 @@ class SecuredController extends Controller
 
                     ],
 
-                ]
-            ]
+                    [
+                        'actions' => ['index', 'view', 'logout'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $action->controller->redirect('/landing');
+                        }
+                    ],
+
+                    [
+                        'actions' => ['login', 'registration', 'landing'],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $action->controller->redirect('/');
+                        }
+                    ]
+                ],
+            ],
+
         ];
     }
 }

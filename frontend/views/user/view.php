@@ -1,14 +1,5 @@
-<?php
-use frontend\models\User;
-use frontend\models\UserCategory;
-$id = Yii::$app->request->get('id');
-$count = UserCategory::find()
-    ->where(['user_id' => $id])
-    ->count();
-
-var_dump($id, $count, (new User)->getRole(Yii::$app->request->get('id')))?>
-
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">

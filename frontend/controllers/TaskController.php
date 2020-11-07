@@ -14,9 +14,11 @@ use frontend\models\TaskFilterForm;
 use yii\web\NotFoundHttpException;
 use yii\widgets\ActiveForm;
 use yii\web\UploadedFile;
+use yii\filters\AccessControl;
 
 class TaskController extends SecuredController
 {
+
     public function actionIndex()
     {
 
@@ -42,26 +44,29 @@ class TaskController extends SecuredController
 
     public function actionCreate() {
 
-        $task = new TaskCreate();
+            $task = new TaskCreate();
 
-        $task->customer_id = Yii::$app->user->id;
+            $task->customer_id = Yii::$app->user->id;
 
-        if (Yii::$app->request->getIsPost()) {
-            $task->load($_POST);
+            if (Yii::$app->request->getIsPost()) {
+                $task->load($_POST);
 
-            if ($task->validate()) {
+                if ($task->validate()) {
 
-                if ($task->create($task)) {
+                    if ($task->create($task)) {
 
-                    return $this->goHome();
+                        return $this->goHome();
+                    }
+                } else {
+                    $errors = $task->getErrors();
                 }
-            } else {
-                $errors = $task->getErrors();
             }
-        }
-        return $this->render('create', [
-            'task'=>$task,
-            'errors' => $errors?? [],
-        ]);
+
+            return $this->render('create', [
+                'task' => $task,
+                'errors' => $errors ?? [],
+            ]);
+
     }
+
 }

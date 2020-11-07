@@ -72,11 +72,11 @@ AppAsset::register($this);
                     <li class="site-list__item">
                         <a href="/user/">Исполнители</a>
                     </li>
-
                     <li class="site-list__item">
+                      <?php  if (Yii::$app->user->can('createTask')) :?>
                         <a href="/task/create/">Создать задание</a>
+                      <?php endif;?>
                     </li>
-
                     <li class="site-list__item site-list__item--active">
                         <a>Мой профиль</a>
                     </li>
