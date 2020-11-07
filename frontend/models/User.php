@@ -273,10 +273,8 @@ class User extends ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password);
     }
 
-    public function isUser ()
+    /*public function isUser ()
     {
-
-
             $id = Yii::$app->request->get('id');
             $cnt = UserCategory::find()
                  ->where(['user_id' => $id])
@@ -284,14 +282,14 @@ class User extends ActiveRecord implements IdentityInterface
 
              if ($cnt == 0) {return true;}
              else {return false;}
-        /*
+
                      $cnt = User::findOne($id);
                      $cat = $cnt->getCategories()->count();
                      if ($cat != null) {
                          return $cat;
                      }
-                     return false;*/
-        }
+                     return false;
+        }*/
 
     public function afterSave($insert, $changedAttributes)
     {

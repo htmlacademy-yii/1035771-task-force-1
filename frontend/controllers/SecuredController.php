@@ -18,7 +18,6 @@ class SecuredController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                //'only' => ['login', 'registration', 'landing', 'logout', 'index', 'view', 'create'],
                 'rules' => [
                     [
                         'actions' => ['index', 'view', 'logout'],

@@ -97,24 +97,22 @@ class RbacController extends Controller
             ->where(['user_id' => $id])->all();
 
         if ($user != $executor) {
-            
+
             //Получаем объект роли
             $role = $auth->getRole('executor');
 
             //Удаляем все роли пользователя
             $auth->revokeAll($id);
 
-            //Присваиваем роль админа по id
+            //Присваиваем роль по id
             $auth->assign($role, $id);
 
         } else {
-            //Получаем объект роли
+
             $role = $auth->getRole('customer');
 
-            //Удаляем все роли пользователя
             $auth->revokeAll($id);
 
-            //Присваиваем роль админа по id
             $auth->assign($role, $id);
             }
     }
