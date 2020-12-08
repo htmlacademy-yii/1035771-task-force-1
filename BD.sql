@@ -52,13 +52,13 @@ CREATE TABLE tasks (
 
 CREATE TABLE task_files (
    id INT AUTO_INCREMENT PRIMARY KEY,
-   file_id VARCHAR (500) NOT NULL,
+   file_id INT NOT NULL,
    task_id INT NOT NULL
 );
 
 CREATE TABLE user_files (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    file_id VARCHAR (500) NOT NULL,
+    file_id INT NOT NULL,
     user_id INT NOT NULL
 );
 
