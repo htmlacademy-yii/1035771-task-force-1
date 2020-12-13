@@ -298,4 +298,13 @@ class User extends ActiveRecord implements IdentityInterface
         $customer = $auth->getRole('customer'); // Получаем роль customer
         $auth->assign($customer, $this->id); // Назначаем пользователю, которому принадлежит модель User
     }
+
+    public function getFullYears($birthdayDate) {
+        $birthday_timestamp = strtotime($birthdayDate);
+        $age = date('Y') - date('Y', $birthday_timestamp);
+        if (date('md', $birthday_timestamp) > date('md')) {
+            return null;
+        }
+        return $age;
+    }
 }

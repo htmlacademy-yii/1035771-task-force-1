@@ -88,9 +88,11 @@ class RbacController extends Controller
         $auth->addChild($admin, $customer);
         $auth->addChild($admin, $executor);
 
-        $auth->assign($admin, 72);
-
+        $auth->assign($admin, 7);
+        $auth->assign($customer, 1);
+        $auth->assign($executor, 2);
 */
+
         $user = (new User)->id;
 
         $executor = \frontend\models\UserCategory::find()
