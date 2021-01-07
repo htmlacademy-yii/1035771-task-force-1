@@ -28,6 +28,7 @@ class File extends \yii\db\ActiveRecord
         return [
             [['url'], 'required'],
             [['url'], 'string', 'max' => 500],
+            [['url'], 'file'],
         ];
     }
 

@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "user_files".
  *
  * @property int $id
- * @property string $file_id
+ * @property int $file_id
  * @property int $user_id
  */
 class UserFile extends \yii\db\ActiveRecord
@@ -29,7 +29,7 @@ class UserFile extends \yii\db\ActiveRecord
         return [
             [['file_id', 'user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['file_id'], 'string', 'max' => 500],
+            [['file_id'], 'integer', 'max' => 500],
             [['file_id', 'user_id'], 'unique', 'targetAttribute' => ['file_id', 'user_id']],
         ];
     }

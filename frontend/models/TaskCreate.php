@@ -77,16 +77,42 @@ class TaskCreate extends Model
         $task->customer_id = Yii::$app->user->getIdentity()->id;
         $task->url_file = $model->upload();
 
-        $task->save();
 
         if (!$task->save()) {
             return null;
         }
 
+        $task->save();
+
         return $task;
     }
 
-    public function upload()
+    /* public function upload(array $files, int $taskId): bool
+    {
+        $dir = Yii::getAlias('@frontend/web/upload/');
+
+        foreach ($files as $file) {
+            $filePath = '@frontend/web/upload/' . $taskId . '_' . $file->name;
+            //if (!$file->saveAs($filePath)) {
+            //    return false;
+            //}
+            $fileInDb = new File();
+            $fileInDb->url = UploadedFile::getInstances($this, 'url');
+            $fileInDb->saveAs($dir . $fileInDb->baseName . '.' . $fileInDb->extension);
+            if (!$fileInDb->save()) {
+                return false;
+            }
+            $taskFile = new TaskFile();
+            $taskFile->task_id = $taskId;
+            $taskFile->file_id = $fileInDb->id;
+            if (!$taskFile->save()) {
+                return false;
+            }
+        }
+        return true;
+    }*/
+
+   public function upload()
     {
         if (UploadedFile::getInstances($this, 'url_file')) {
             $this->url_file = UploadedFile::getInstances($this, 'url_file');
@@ -95,7 +121,7 @@ class TaskCreate extends Model
 
             foreach ($this->url_file as $item) {
 
-                $item->saveAs($dir . $item->baseName . '.' . $item->extension);
+                $item->saveAs($dir . $item->baseName . $item->extension);
                 $files[] = $item->baseName . '.' . $item->extension;
 
             }
