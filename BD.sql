@@ -40,7 +40,7 @@ CREATE TABLE tasks (
     title VARCHAR(255) NOT NULL,
     description VARCHAR (500) NOT NULL,
     creation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-    status TINYINT NOT NULL DEFAULT 1,
+    status TINYINT NULL DEFAULT 0,
     url_file VARCHAR(500) NULL,
     deadline DATETIME,
     budget INT NULL,
@@ -52,13 +52,13 @@ CREATE TABLE tasks (
 
 CREATE TABLE task_files (
    id INT AUTO_INCREMENT PRIMARY KEY,
-   file_id VARCHAR (500) NOT NULL,
+   file_id INT NOT NULL,
    task_id INT NOT NULL
 );
 
 CREATE TABLE user_files (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    file_id VARCHAR (500) NOT NULL,
+    file_id INT NOT NULL,
     user_id INT NOT NULL
 );
 

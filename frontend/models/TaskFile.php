@@ -3,12 +3,13 @@
 namespace frontend\models;
 
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "task_files".
  *
  * @property int $id
- * @property string $file_id
+ * @property int $file_id
  * @property int $task_id
  */
 class TaskFile extends \yii\db\ActiveRecord
@@ -29,7 +30,7 @@ class TaskFile extends \yii\db\ActiveRecord
         return [
             [['file_id', 'task_id'], 'required'],
             [['task_id'], 'integer'],
-            [['file_id'], 'string', 'max' => 500],
+            [['file_id'], 'integer', 'max' => 500],
             [['file_id', 'task_id'], 'unique', 'targetAttribute' => ['file_id', 'task_id']],
         ];
     }
@@ -65,4 +66,5 @@ class TaskFile extends \yii\db\ActiveRecord
     {
         return $this->hasMany(File::className(), ['file_id' => 'id']);
     }
+
 }

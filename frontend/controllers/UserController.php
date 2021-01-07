@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\models\UserCategory;
 use Yii;
 use frontend\models\User;
 use frontend\models\UserFilterForm;

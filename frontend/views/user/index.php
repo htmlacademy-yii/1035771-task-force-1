@@ -1,6 +1,8 @@
 <?php
+
 use yii\widgets\ActiveForm;
 use frontend\models\Category;
+
 ?>
 
 <!DOCTYPE html>
@@ -36,8 +38,8 @@ use frontend\models\Category;
                     <div class="feedback-card__top">
                         <div class="user__search-icon">
                             <a href="#"><img src="/img/man-glasses.jpg" width="65" height="65"></a>
-                            <span>17 заданий</span>
-                            <span><?=$user->views?> отзывов</span>
+                            <span><?=count($user->taskCustomer);?> заданий</span>
+                            <span><?=count($user->reviewExecutor);?> отзывов</span>
                         </div>
                         <div class="feedback-card__top--name user__search-card">
                             <p class="link-name"><a href="/user/view/<?php echo $user->id?>" class="link-regular"><?=$user->name?></a></p>

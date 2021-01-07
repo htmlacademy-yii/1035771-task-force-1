@@ -3,8 +3,11 @@
 
 namespace frontend\controllers;
 
+use frontend\models\User;
+use frontend\models\UserCategory;
 use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 
 class SecuredController extends Controller
@@ -15,11 +18,18 @@ class SecuredController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-              //  'only' => ['index'],
                 'rules' => [
                     [
+                        'actions' => ['index', 'view', 'logout'],
                         'allow' => true,
-                        'roles' => ['@']
+                        'roles' => ['@'],
+
+                    ],
+
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['createTask'],
                     ],
 
                     [
@@ -28,8 +38,27 @@ class SecuredController extends Controller
                         'roles' => ['?'],
 
                     ],
-                ]
-            ]
+
+                    [
+                        'actions' => ['index', 'view', 'logout'],
+                        'allow' => false,
+                        'roles' => ['?'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $action->controller->redirect('/landing');
+                        }
+                    ],
+
+                    [
+                        'actions' => ['login', 'registration', 'landing'],
+                        'allow' => false,
+                        'roles' => ['@'],
+                        'denyCallback' => function ($rule, $action) {
+                            return $action->controller->redirect('/');
+                        }
+                    ]
+                ],
+            ],
+
         ];
     }
 }

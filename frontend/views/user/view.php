@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -17,7 +18,10 @@
                         <img src="/img/man-hat.png" width="120" height="120" alt="Аватар пользователя">
                         <div class="content-view__headline">
                             <h1><?=$user['name'];?></h1>
-                            <p>Россия, <?=$user->locations->city;?>, <?=Yii::$app->formatter->asRelativeTime($user->birthday) ?? '';?> лет</p>
+                            <p>Россия, <?=$user->locations->city;?>,
+                                <?php if (isset($user->birthday)) :?>
+                                <?=$user->getFullYears($user->birthday) ?? '';?> лет
+                                <? endif ?></p>
                             <div class="profile-mini__name five-stars__rate">
                                 <span></span><span></span><span></span><span></span><span class="star-disabled"></span>
                                 <b>4.25</b>

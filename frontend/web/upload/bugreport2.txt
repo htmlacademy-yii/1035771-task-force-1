@@ -1,0 +1,40 @@
+date/time          : 2020-05-19, 23:20:14, 811ms
+computer name      : DESKTOP-CM36G5U
+user name          : vikto
+registered owner   : viktoria.vaseva@gmail.com
+operating system   : Windows 10 x64 build 18362
+system language    : Russian
+system up time     : 5 days 14 hours
+program up time    : 53 minutes 11 seconds
+processors         : 4x Intel(R) Core(TM) i3-8130U CPU @ 2.20GHz
+physical memory    : 3988/8076 MB (free/total)
+free disk space    : (C:) 34,81 GB
+display mode       : 1280x720, 32 bit
+process id         : $4354
+allocated memory   : 55,05 MB
+largest free block : 1,29 GB
+executable         : heidisql.exe
+exec. date/time    : 2019-01-26 07:17
+version            : 10.1.0.5464
+compiled with      : Delphi 10.3 Rio
+madExcept version  : 5.0.0
+callstack crc      : $cba16ba4, $bb98c1d2, $bb98c1d2
+exception number   : 1
+exception class    : EOSError
+exception message  : System Error. Code: 1400. Недопустимый дескриптор окна.
+
+main thread ($7f00):
+0045aeab heidisql.exe System.SysUtils        RaiseLastOSError
+005ce501 heidisql.exe Vcl.Controls           TWinControl.DestroyWindowHandle
+005cc720 heidisql.exe Vcl.Controls           TWinControl.Destroy
+005d5830 heidisql.exe Vcl.Controls           TCustomControl.Destroy
+005cc74e heidisql.exe Vcl.Controls           TWinControl.Destroy
+006b8d5b heidisql.exe Vcl.Forms              TScrollingWinControl.Destroy
+006b9ea4 heidisql.exe Vcl.Forms              TCustomForm.Destroy
+00408f88 heidisql.exe System          196 +0 TObject.Free
+004ef052 heidisql.exe System.Classes         TComponent.DestroyComponents
+006b7af5 heidisql.exe Vcl.Forms              DoneApplication
+00450271 heidisql.exe System.SysUtils        DoExitProc
+0040ac7e heidisql.exe System          196 +0 @Halt0
+76ef6357 KERNEL32.DLL                        BaseThreadInitThunk
+
